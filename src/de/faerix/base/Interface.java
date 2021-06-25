@@ -15,12 +15,12 @@ import de.faerix.base.faerie.Faerie;
 public class Interface extends Spielobjekt{
 	
 	public Interface() {
-		oval = new Ellipse(500, 200, 100, 25);
+
 	}
 	
 	
 
-	private Shape oval;
+
 	public void checkInput(Input input, GameContainer container, Faerie faerie,  Deque<Stone> interactableObjs) {
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			container.exit();
@@ -33,7 +33,10 @@ public class Interface extends Spielobjekt{
 		} else if (input.isKeyDown(Input.KEY_LEFT)) {
 			faerie.moveX(-1);
 		}
-		else if(input.isKeyDown(Input.KEY_SPACE)) {
+		if(input.isKeyPressed(Input.KEY_Q)) {
+			faerie.autoattack();
+		}
+		if(input.isKeyPressed(Input.KEY_SPACE)) {
 			this.checkIntersection(faerie, interactableObjs);
 		}
 	}
@@ -68,7 +71,7 @@ public class Interface extends Spielobjekt{
 	}
 	
 	public void render(Graphics g) {
-		g.fill(oval);
+
 	}
 
 	

@@ -10,10 +10,10 @@ public class StarFaerie implements FaerieState {
 
 	public StarFaerie(Faerie faerie) {
 		try {
-			faerie.image = new Image("testdata/starfaerie.png").getScaledCopy(68, 65);
-			faerie.leftWings = new Image("testdata/left_wing_star.png").getScaledCopy(150, 150);
-			faerie.rightWings = new Image("testdata/right_wing_star.png").getScaledCopy(150, 150);
-			faerie.sparkleImage = new Image("testdata/firefaeriesparkle.png", new Color(255,255,255,0.5f));
+			faerie.image = new Image("assets/starfaerie.png").getScaledCopy(68, 65);
+			faerie.leftWings = new Image("assets/left_wing_star.png").getScaledCopy(150, 150);
+			faerie.rightWings = new Image("assets/right_wing_star.png").getScaledCopy(150, 150);
+			faerie.sparkleImage = new Image("assets/faerie/star_sparkle.png", new Color(255,255,255,0.5f));
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

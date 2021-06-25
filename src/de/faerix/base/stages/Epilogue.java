@@ -23,7 +23,7 @@ public class Epilogue extends BasicGameState{
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 //		bgMusic = new Music("testdata/sound/Death_Note_achtig.ogg");
 //		bgMusic.loop();
-		click = new Sound("testdata/sound/click.wav");
+		click = new Sound("assets/sound/click.wav");
 		this.play = new Epilogue(13);
 		
 	}

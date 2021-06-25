@@ -28,8 +28,8 @@ public class DawnStage extends BasicGameState {
 	}
 
 	public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-		image = new Image("testdata/faerie.png");
-		startBild = new Image("testdata/dawnstage_bg.png").getScaledCopy(gc.getWidth(), gc.getHeight());
+		image = new Image("assets/faerie.png");
+		startBild = new Image("assets/dawnstage_bg.png").getScaledCopy(gc.getWidth(), gc.getHeight());
 		this.faerie = new Faerie();
 		this.gamehub = new Interface(); 
 		int field = 1 + (int) (Math.random() * ((800-1)));
@@ -42,10 +42,8 @@ public class DawnStage extends BasicGameState {
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		startBild.draw();
 		this.faerie.render(g);
-		this.gamehub.render(g);
 		this.interactableShapes.peek().render(g);
 		g.draw(this.enemies.peek());
-		g.drawString(""+ faerie.currentHp,680,450);
 	}
 
 

@@ -34,7 +34,7 @@ public class GameOver extends BasicGameState {
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 		// bgMusic = new Music("testdata/sound/Death_Note_achtig.ogg");
 		// bgMusic.loop();
-		background = new Image("testdata/game_over.png").getScaledCopy(container.getWidth(), container.getHeight());
+		background = new Image("assets/game_over.png").getScaledCopy(container.getWidth(), container.getHeight());
 		this.play = new GameOver(14);
 
 		Random random = new Random();

@@ -1,10 +1,12 @@
 package de.faerix.base.stages;
 import java.util.Timer;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
@@ -27,7 +29,7 @@ public class Prologue extends BasicGameState{
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
 //		bgMusic = new Music("testdata/sound/Death_Note_achtig.ogg");
 //		bgMusic.loop();
-		click = new Sound("testdata/sound/click.wav");
+		click = new Sound("assets/sound/click.wav");
 		this.play = new Prologue(1);
 		
 	}
@@ -55,6 +57,11 @@ public class Prologue extends BasicGameState{
 			click.play(3, (float) 0.5);
 				this.string = string.substring(0, time/100);				
 			}
+		
+		Input input  = container.getInput();
+		if(input.isKeyPressed(Input.KEY_SPACE)) {
+			game.enterState(2);
+		}
 	}
 
 	@Override

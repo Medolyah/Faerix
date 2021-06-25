@@ -20,12 +20,12 @@ public class Menu extends BasicGameState{
 		
 	}
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException{
-		startBild = new Image("testdata/startBild.png");
+		startBild = new Image("assets/startBild.png");
 		//exitGame = new Image("testdata/Exit.png");
-		playNow = new Image("testdata/playNow.png");
-		bgMusic = new Music("testdata/sound/Death_Note_achtig.ogg");
+		playNow = new Image("assets/playNow.png");
+		bgMusic = new Music("assets/sound/Death_Note_achtig.ogg");
 		bgMusic.loop();
-		click = new Sound("testdata/sound/click.wav");
+		click = new Sound("assets/sound/click.wav");
 		this.play = new DawnStage(1);
 		
 		

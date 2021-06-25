@@ -1,5 +1,7 @@
 package de.faerix.base.faerie;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
 import java.util.Random;
 
 import org.newdawn.slick.Color;
@@ -9,102 +11,126 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Ellipse;
 
 import de.faerix.base.Spielobjekt;
+import de.faerix.base.enums.Direction;
 import de.faerix.base.enums.StoneEnum;
 
-
-public class Faerie extends Spielobjekt{
-	Image image, leftWings, rightWings; 
-	Image sparkleImage; 
-	public Ellipse ellipse; 
+public class Faerie extends Spielobjekt {
+	Image image, leftWings, rightWings;
+	Image sparkleImage;
+	public Ellipse ellipse;
 	float yPosition = 200;
-	float xPosition = 200; 
+	float xPosition = 200;
 	private float[] fallingSparkX = new float[50];
 	private float[] fallingSparkY = new float[50];
 	private int[] stopping = new int[50];
 	Image[] sparkles = new Image[50];
 	public FaerieState form;
-	private boolean isLeftSide; 
-	private boolean isSideWays; 
+	Direction direction;
 	int maxHp;
 	public int currentHp = 50;
-	
+	int amunition = 5, maxAmunition = 5;
+	Deque<AttackSparkle> shotAutoattacks = new ArrayDeque<AttackSparkle>();
+
 	public Faerie() {
 		this.form = new BasicFaerie(this);
 		this.ellipse = new Ellipse(this.xPosition, this.yPosition, 25, 25);
 		Random random = new Random();
-		for(int i = 0; i <50; i++) {
-			this.fallingSparkX[i]=this.xPosition - 25 + (float)random.nextInt(50);
-			this.fallingSparkY[i]=this.yPosition - 25 + (float)random.nextInt(50);
-			this.stopping[i] = 30 + (int)random.nextInt(25);
+		this.direction = Direction.East;
+		for (int i = 0; i < 50; i++) {
+			this.fallingSparkX[i] = this.xPosition - 25 + (float) random.nextInt(50);
+			this.fallingSparkY[i] = this.yPosition - 25 + (float) random.nextInt(50);
+			this.stopping[i] = 30 + (int) random.nextInt(25);
 		}
 //		this.sparkle();
-	
+
 	}
-	
 
 	public void drawImage(Graphics g) {
-		if(isLeftSide || !isSideWays)  g.drawImage(this.leftWings, this.xPosition-85, this.yPosition-85);
-		if(!isLeftSide || !isSideWays) {g.drawImage(this.rightWings, this.xPosition-75, this.yPosition-85);}
-		g.drawImage(this.image, this.xPosition-32, this.yPosition-28);
-	    
+		if (direction == Direction.South || direction == Direction.North || direction == Direction.East)
+			g.drawImage(this.leftWings, this.xPosition - 85, this.yPosition - 85);
+		if (direction == Direction.South || direction == Direction.North || direction == Direction.West) {
+			g.drawImage(this.rightWings, this.xPosition - 75, this.yPosition - 85);
+		}
+		g.drawImage(this.image, this.xPosition - 32, this.yPosition - 28);
+
 	}
-	
+
 	public void updateImage() {
-		
+
 	}
-	
+
 	public void fall() {
-		for (int i = 0; i< 50 ; i++) {
+		for (int i = 0; i < 50; i++) {
 			Random random = new Random();
-			if(this.fallingSparkY[i] > this.yPosition+this.stopping[i]) {
-				this.fallingSparkY[i] = this.yPosition - 10 + (float)random.nextInt(20);
-				this.fallingSparkX[i] = this.xPosition - 25 + (float)random.nextInt(50);
+			if (this.fallingSparkY[i] > this.yPosition + this.stopping[i]) {
+				this.fallingSparkY[i] = this.yPosition - 10 + (float) random.nextInt(20);
+				this.fallingSparkX[i] = this.xPosition - 25 + (float) random.nextInt(50);
 			}
 			this.fallingSparkY[i] += random.nextFloat();
-			this.fallingSparkX[i] +=  - 1 + (float)random.nextInt(3);
+			this.fallingSparkX[i] += -1 + (float) random.nextInt(3);
 		}
 
 	}
-	
 
 	public void moveX(int xMove) {
-		isSideWays = true;
-		if(xMove > 0) {
-			this.isLeftSide = true;
+		if (xMove > 0) {
+			direction = Direction.East;
+		} else {
+			direction = Direction.West;
 		}
-		else {
-			this.isLeftSide =false;
-		}
-		this.xPosition += (float)(xMove*0.5);
+		this.xPosition += (float) (xMove * 0.5);
 		this.ellipse.setCenterX(this.xPosition);
-		
+
 	}
-	
-	public void moveY( int yMove) {
-		isSideWays = false;
-		if(yMove>0) {
-			this.yPosition += yMove*0.6;
-		}else {
-			this.yPosition += yMove *0.5;			
+
+	public void moveY(int yMove) {
+		if (yMove > 0) {
+			direction = Direction.South;
+			this.yPosition += yMove * 0.6;
+		} else {
+			direction = Direction.North;
+			this.yPosition += yMove * 0.5;
 		}
-		this.ellipse.setCenterY(this.yPosition);			
+		this.ellipse.setCenterY(this.yPosition);
 	}
-	
+
 	@Override
-	public void update( int delta) {
-	this.fall();
+	public void update(int delta) {
+		this.fall();
+		this.updateAutoattacks(delta);
 	}
-	
+
 	@Override
 	public void render(Graphics g) {
 		this.form.setSparkleColor(this, g);
 		this.renderSparkle(g);
 		g.fill(this.ellipse);
 		this.drawImage(g);
+		this.renderAutoattacks(g);
 	}
-	
-	public void collectSphere(StoneEnum stone) {
-		switch(stone) {
+
+	public void renderAutoattacks(Graphics g) {
+		for (AttackSparkle aa : this.shotAutoattacks) {
+			aa.render(g);
+
+		}
+	}
+
+	public void updateAutoattacks(int delta) {
+		for (AttackSparkle aa : this.shotAutoattacks) {
+			if (aa.isDead) {
+				this.shotAutoattacks.remove();
+				if(this.amunition <= this.maxAmunition) {
+					this.amunition++;					
+				}
+			}else {
+				aa.update(delta);				
+			}
+		}
+	}
+
+ 	public void collectSphere(StoneEnum stone) {
+		switch (stone) {
 		case BLUE:
 			this.form.collectWaterStone(this);
 			break;
@@ -117,17 +143,26 @@ public class Faerie extends Spielobjekt{
 		}
 
 	}
-	
+
 	public void renderSparkle(Graphics g) {
-		for (int i = 0; i< 50 ; i++) {
-			int size = 1 + (int) (Math.random() * ((15-1)));
+		for (int i = 0; i < 50; i++) {
+			int size = 1 + (int) (Math.random() * ((15 - 1)));
 			g.drawImage(this.sparkleImage.getScaledCopy(size, size), this.fallingSparkX[i], this.fallingSparkY[i]);
 		}
 	}
 
-
 	public void takeDamage() {
-		this.currentHp += -1; 
+		this.currentHp += -1;
+
+	}
+
+	public void autoattack() {
+		this.form.autoattack(this);
+	}
+
+	public void setMaxamunition(int i) {
+		this.maxAmunition = i;
+		this.amunition = i;
 		
 	}
 }
