@@ -22,7 +22,8 @@ public class Prologue extends BasicGameState{
 	Sound click;
 	int time = 0;
 	String string = "";
-	StagesHandler handler; 
+	StagesHandler handler;
+
 	
 	public Prologue(StageEnum prologue) {
 		
@@ -34,7 +35,7 @@ public class Prologue extends BasicGameState{
 //		bgMusic.loop();
 		click = new Sound("assets/sound/click.wav");
 		this.play = new Prologue(StageEnum.Prologue);
-		this.handler = new StagesHandler(); 
+		this.handler = StagesHandler.getInstance(); 
 		
 	}
 

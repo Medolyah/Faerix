@@ -5,6 +5,7 @@ public enum StageEnum {
 	Prologue(1),
 	DawnStage(2),
 	NightskyStage(3),
+	MoonStage(4),
 	Epilogue(13),
 	Gameover(14);
 

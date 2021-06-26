@@ -16,20 +16,19 @@ import de.faerix.base.stages.StagesHandler;
 public class GameHub extends Spielobjekt{
 	
 	private static GameHub gamehub = null;
-	public Faerie faerie; 
 	public static GameHub getInstance() {
 		if(gamehub == null) gamehub = new GameHub();
 		return gamehub;
 	}
 	
 	public GameHub() {
-		this.faerie = new Faerie();
+		
 	}
 	
 	
 
 
-	public void checkInput(Input input, GameContainer container, Deque<Stone> interactableObjs) {
+	public void checkInput(Input input, GameContainer container, Deque<Stone> interactableObjs, Faerie faerie) {
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			container.exit();
 		} else if (input.isKeyDown(Input.KEY_UP)) {
@@ -59,7 +58,7 @@ public class GameHub extends Spielobjekt{
 
 	}
 	
-	public void checkCollision( Deque<Shape> enemies){
+	public void checkCollision( Deque<Shape> enemies, Faerie faerie){
 		for(Shape enemy : enemies) {
 			if(faerie.ellipse.intersects(enemy)) {
 				faerie.takeDamage(); 
@@ -85,13 +84,13 @@ public class GameHub extends Spielobjekt{
 	
 	
 	public void update( int delta) {
-		this.faerie.update(delta);
+
 
 		
 	}
 	
 	public void render(Graphics g) {
-		this.faerie.render(g);
+
 
 	}
 

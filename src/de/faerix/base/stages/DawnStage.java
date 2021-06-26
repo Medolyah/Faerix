@@ -16,7 +16,7 @@ import de.faerix.base.enums.StageEnum;
 import de.faerix.base.enums.StoneEnum;
 import de.faerix.base.faerie.Faerie;
 
-public class DawnStage extends BasicGameState implements Stage {
+public class DawnStage extends BasicGameState implements GameStage{
 
 	Image image, startBild, Ellipse;
 	Faerie faerie;
@@ -37,7 +37,7 @@ public class DawnStage extends BasicGameState implements Stage {
 		this.portal = new Portal(500, 300);
 		startBild = new Image("assets/dawnstage_bg.png").getScaledCopy(gc.getWidth(), gc.getHeight());
 		this.gamehub = new GameHub();
-		this.handler = new StagesHandler();
+		this.handler = StagesHandler.getInstance();
 		this.level = this.handler.getLevel(StageEnum.DawnStage);
 		int field = 1 + (int) (Math.random() * ((800 - 1)));
 
@@ -48,6 +48,7 @@ public class DawnStage extends BasicGameState implements Stage {
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		g.drawImage(this.startBild, this.xPos, 0);
+		this.faerie.render(g);
 		this.gamehub.render(g);
 		this.interactableShapes.peek().render(g);
 		g.draw(this.enemies.peek());
@@ -62,21 +63,31 @@ public class DawnStage extends BasicGameState implements Stage {
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 			Input input = container.getInput();
 			this.gamehub.update(delta);
+			this.faerie.update(delta);
 			this.interactableShapes.peek().update(delta);
-			this.gamehub.checkInput(input, container, this.interactableShapes);
-			this.gamehub.checkCollision(this.enemies);
+			this.gamehub.checkInput(input, container, this.interactableShapes, faerie);
+			this.gamehub.checkCollision(this.enemies, faerie);
 			if (this.faerie.currentHp == 0) {
 				game.enterState(StageEnum.Gameover.getNumVal());
 			}
 			if (input.isKeyPressed(Input.KEY_Z)) {
-				game.enterState(this.handler.nextStage(this.level));
+				this.goToNextLevel(game);
 			}
 	}
 
 	@Override
-	public void initObjects(Faerie faerie, Shape[] enemies, GameHub gamehub) {
-		// TODO Auto-generated method stub
+	public void giveFaerie(Faerie faerie) {
+		this.faerie = faerie;
 
 	}
+	
+	public void goToNextLevel(StateBasedGame game) {
+		int nextLevel = this.handler.getNextLevelByInt(this.level);
+		GameStage nextStage = (GameStage)game.getState(nextLevel);
+		nextStage.giveFaerie(this.faerie);
+		game.enterState(this.handler.nextStage(this.level));
+	}
+
+
 
 }

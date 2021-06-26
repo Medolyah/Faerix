@@ -20,7 +20,7 @@ import de.faerix.base.enums.StageEnum;
 import de.faerix.base.enums.StoneEnum;
 import de.faerix.base.faerie.Faerie;
 
-public class NightskyStage extends  BasicGameState{
+public class NightskyStage extends  BasicGameState implements GameStage{
 
 	Image image, startBild, Ellipse;	
 
@@ -42,7 +42,7 @@ public class NightskyStage extends  BasicGameState{
 		this.portal =  new Portal(500,300);
 		startBild = new Image("assets/nightsky_bg.png").getScaledCopy(gc.getWidth(), gc.getHeight());
 		this.gamehub = new GameHub(); 
-		this.handler = new StagesHandler();
+		this.handler = StagesHandler.getInstance();
 		this.level = this.handler.getLevel(StageEnum.NightskyStage);
 		
 		int field = 1 + (int) (Math.random() * ((800-1)));
@@ -55,13 +55,12 @@ public class NightskyStage extends  BasicGameState{
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		g.drawImage(this.startBild, this.xPos, 0);
+		this.faerie.render(g);
 		this.gamehub.render(g);
 		this.interactableShapes.peek().render(g);
 		g.draw(this.enemies.peek());
 		portal.render(g);
 	}
-
-
 
 	public int getID() {
 		return StageEnum.NightskyStage.getNumVal();
@@ -70,15 +69,29 @@ public class NightskyStage extends  BasicGameState{
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 			Input input = container.getInput();
-			this.interactableShapes.peek().update(delta);
 			this.gamehub.update(delta);
-			this.gamehub.checkInput(input, container, this.interactableShapes);
-			this.gamehub.checkCollision( this.enemies);
-			if (this.gamehub.faerie.currentHp == 0) {
+			this.faerie.update(delta);
+			this.interactableShapes.peek().update(delta);
+			this.gamehub.checkInput(input, container, this.interactableShapes, faerie);
+			this.gamehub.checkCollision(this.enemies, faerie);
+			if (this.faerie.currentHp == 0) {
 				game.enterState(StageEnum.Gameover.getNumVal());
 			}
-			if(input.isKeyPressed(Input.KEY_Z)) {
-				game.enterState(this.handler.nextStage(this.level));
+			if (input.isKeyPressed(Input.KEY_Z)) {
+				this.goToNextLevel(game);
 			}
-		}
+	}
+
+	@Override
+	public void giveFaerie(Faerie faerie) {
+		this.faerie = faerie;
+
+	}
+	
+	public void goToNextLevel(StateBasedGame game) {
+		int nextLevel = this.handler.getNextLevelByInt(this.level);
+		GameStage nextStage = (GameStage)game.getState(nextLevel);
+		nextStage.giveFaerie(this.faerie);
+		game.enterState(this.handler.nextStage(this.level));
+	}
 }

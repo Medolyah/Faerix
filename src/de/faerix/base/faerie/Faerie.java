@@ -33,6 +33,7 @@ public class Faerie extends Spielobjekt {
 	Deque<AttackSparkle> shotAutoattacks = new ArrayDeque<AttackSparkle>();
 
 	public Faerie() {
+		System.out.println("new faerie has been created!"); 
 		this.form = new BasicFaerie(this);
 		this.ellipse = new Ellipse(this.xPosition, this.yPosition, 25, 25);
 		Random random = new Random();
