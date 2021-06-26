@@ -2,6 +2,9 @@ package de.faerix.base.stages;
 
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.*;
+
+import de.faerix.base.enums.StageEnum;
+
 import org.lwjgl.input.Mouse;
 
 public class Menu extends BasicGameState{
@@ -16,17 +19,18 @@ public class Menu extends BasicGameState{
 	
 	
 	
-	public Menu(int state) {
+	
+	public Menu(StageEnum menu) {
 		
 	}
 	public void init(GameContainer container, StateBasedGame sbg) throws SlickException{
 		startBild = new Image("assets/startBild.png");
 		//exitGame = new Image("testdata/Exit.png");
 		playNow = new Image("assets/playNow.png");
-		bgMusic = new Music("assets/sound/Death_Note_achtig.ogg");
+		bgMusic = new Music("assets/sound/deathnotelike.wav");
 		bgMusic.loop();
 		click = new Sound("assets/sound/click.wav");
-		this.play = new DawnStage(1);
+		this.play = new DawnStage(StageEnum.DawnStage);
 		
 		
 		

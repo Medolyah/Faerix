@@ -15,6 +15,8 @@ import org.newdawn.slick.geom.Shape;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import de.faerix.base.enums.StageEnum;
+
 public class GameOver extends BasicGameState {
 
 	GameOver play;
@@ -26,7 +28,7 @@ public class GameOver extends BasicGameState {
 	private float width = 10;
 	private float[] factors = new float[30];
 
-	public GameOver(int state) {
+	public GameOver(StageEnum gameover) {
 
 	}
 
@@ -35,7 +37,7 @@ public class GameOver extends BasicGameState {
 		// bgMusic = new Music("testdata/sound/Death_Note_achtig.ogg");
 		// bgMusic.loop();
 		background = new Image("assets/game_over.png").getScaledCopy(container.getWidth(), container.getHeight());
-		this.play = new GameOver(14);
+		this.play = new GameOver(StageEnum.Gameover);
 
 		Random random = new Random();
 		for (int i = 0; i < 30; i++) {
@@ -75,7 +77,7 @@ public class GameOver extends BasicGameState {
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 14;
+		return StageEnum.Gameover.getNumVal();
 	}
 
 }

@@ -1,5 +1,6 @@
 package de.faerix.base.stages;
 
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Music;
@@ -8,6 +9,8 @@ import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import de.faerix.base.enums.StageEnum;
+
 public class Epilogue extends BasicGameState{
 	Epilogue play;
 	Music bgMusic;
@@ -15,7 +18,7 @@ public class Epilogue extends BasicGameState{
 	int time = 0;
 	String string = "";
 	
-	public Epilogue(int state) {
+	public Epilogue(StageEnum epilogue) {
 		
 	}
 	
@@ -24,13 +27,13 @@ public class Epilogue extends BasicGameState{
 //		bgMusic = new Music("testdata/sound/Death_Note_achtig.ogg");
 //		bgMusic.loop();
 		click = new Sound("assets/sound/click.wav");
-		this.play = new Epilogue(13);
+		this.play = new Epilogue(StageEnum.Epilogue);
 		
 	}
 
 	@Override
 	public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
-
+		g.setColor(Color.white);
 		g.drawString(this.string, 240, 450);
 
 		// in update():
@@ -56,6 +59,6 @@ public class Epilogue extends BasicGameState{
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 13;
+		return StageEnum.Epilogue.getNumVal();
 	}
 }

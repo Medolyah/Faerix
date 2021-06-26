@@ -18,8 +18,8 @@ public class Faerie extends Spielobjekt {
 	Image image, leftWings, rightWings;
 	Image sparkleImage;
 	public Ellipse ellipse;
-	float yPosition = 200;
-	float xPosition = 200;
+	public float yPosition = 200;
+	public float xPosition = 200;
 	private float[] fallingSparkX = new float[50];
 	private float[] fallingSparkY = new float[50];
 	private int[] stopping = new int[50];
@@ -29,6 +29,7 @@ public class Faerie extends Spielobjekt {
 	int maxHp;
 	public int currentHp = 50;
 	int amunition = 5, maxAmunition = 5;
+	public float velocity; 
 	Deque<AttackSparkle> shotAutoattacks = new ArrayDeque<AttackSparkle>();
 
 	public Faerie() {
@@ -78,7 +79,7 @@ public class Faerie extends Spielobjekt {
 		} else {
 			direction = Direction.West;
 		}
-		this.xPosition += (float) (xMove * 0.5);
+		this.xPosition += (float) (xMove * this.velocity);
 		this.ellipse.setCenterX(this.xPosition);
 
 	}
@@ -86,10 +87,10 @@ public class Faerie extends Spielobjekt {
 	public void moveY(int yMove) {
 		if (yMove > 0) {
 			direction = Direction.South;
-			this.yPosition += yMove * 0.6;
+			this.yPosition += yMove * (this.velocity-0.1f);
 		} else {
 			direction = Direction.North;
-			this.yPosition += yMove * 0.5;
+			this.yPosition += yMove * this.velocity;
 		}
 		this.ellipse.setCenterY(this.yPosition);
 	}

@@ -13,6 +13,8 @@ import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import de.faerix.base.enums.StageEnum;
+
 public class Prologue extends BasicGameState{
 
 	Prologue play;
@@ -20,8 +22,9 @@ public class Prologue extends BasicGameState{
 	Sound click;
 	int time = 0;
 	String string = "";
+	StagesHandler handler; 
 	
-	public Prologue(int state) {
+	public Prologue(StageEnum prologue) {
 		
 	}
 	
@@ -30,7 +33,8 @@ public class Prologue extends BasicGameState{
 //		bgMusic = new Music("testdata/sound/Death_Note_achtig.ogg");
 //		bgMusic.loop();
 		click = new Sound("assets/sound/click.wav");
-		this.play = new Prologue(1);
+		this.play = new Prologue(StageEnum.Prologue);
+		this.handler = new StagesHandler(); 
 		
 	}
 
@@ -60,14 +64,14 @@ public class Prologue extends BasicGameState{
 		
 		Input input  = container.getInput();
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
-			game.enterState(2);
+			game.enterState(this.handler.nextStage(0));
 		}
 	}
 
 	@Override
 	public int getID() {
 		// TODO Auto-generated method stub
-		return 1;
+		return StageEnum.Prologue.getNumVal();
 	}
 
 }

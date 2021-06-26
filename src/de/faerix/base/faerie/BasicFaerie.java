@@ -82,6 +82,7 @@ public class BasicFaerie implements FaerieState {
 
 	@Override
 	public void setStats(Faerie faerie) {
+		faerie.velocity = 0.5f;
 		faerie.maxHp = 10;
 		faerie.currentHp = faerie.maxHp;
 		faerie.setMaxamunition(10); 
