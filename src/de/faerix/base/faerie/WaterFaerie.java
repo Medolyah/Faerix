@@ -17,7 +17,7 @@ public class WaterFaerie implements FaerieState {
 			faerie.leftWings = new Image("assets/left_wing_water.png").getScaledCopy(150, 150);
 			faerie.rightWings = new Image("assets/right_wing_water.png").getScaledCopy(150, 150);
 			faerie.sparkleImage = new Image("assets/faerie/water_sparkle.png", new Color(255,255,255,0.5f));
-			this.setStats(faerie);
+			//this.setStats(faerie);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -77,7 +77,7 @@ public class WaterFaerie implements FaerieState {
 
 
 	@Override
-	public void setStats(Faerie faerie) {
+	public void setStats(int maxAmunition, float velocity, int maxHp, int invinvibleDuration, Faerie faerie) {
 		// TODO Auto-generated method stub
 		faerie.setMaxamunition(10);
 	}

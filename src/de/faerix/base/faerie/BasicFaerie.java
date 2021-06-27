@@ -20,7 +20,7 @@ public class BasicFaerie implements FaerieState {
 			faerie.sparkleImage = new Image("assets/faerie/basic_sparkle.png");
 
 			
-			this.setStats(faerie);
+			//this.setStats(faerie);
 			
 			
 		} catch (SlickException e) {
@@ -81,11 +81,11 @@ public class BasicFaerie implements FaerieState {
 	}
 
 	@Override
-	public void setStats(Faerie faerie) {
-		faerie.velocity = 0.5f;
-		faerie.maxHp = 10;
-		faerie.currentHp = faerie.maxHp;
-		faerie.setMaxamunition(10); 
+	public void setStats(int maxAmunition, float velocity, int maxHp, int invinvibleDuration, Faerie faerie) {
+//		faerie.velocity = 0.5f;
+//		faerie.maxHp = 10;
+//		faerie.currentHp = faerie.maxHp;
+//		faerie.setMaxamunition(10); 
 	}
 
 }

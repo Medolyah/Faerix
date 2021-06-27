@@ -11,5 +11,5 @@ public interface FaerieState {
 	public void collectWaterStone(Faerie faerie);
 	public void collectStarStone(Faerie faerie);
 	public void setSparkleColor(Faerie faerie, Graphics g);
-	public void setStats(Faerie faerie);
+	public void setStats(int maxAmunition, float velocity, int maxHp, int invinvibleDuration, Faerie faerie);
 }

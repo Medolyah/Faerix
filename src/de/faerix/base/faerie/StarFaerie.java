@@ -66,7 +66,7 @@ public class StarFaerie implements FaerieState {
 
 
 	@Override
-	public void setStats(Faerie faerie) {
+	public void setStats(int maxAmunition, float velocity, int maxHp, int invinvibleDuration, Faerie faerie){
 		// TODO Auto-generated method stub
 		
 	}

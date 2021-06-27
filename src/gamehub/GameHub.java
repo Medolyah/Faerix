@@ -99,11 +99,8 @@ public class GameHub extends GameObject{
 	}
 	
 	public void checkIfEnemyGotHit( Deque<Shape> enemies, Deque<AttackSparkle> aas){
-		System.out.println("test");
 		for(Shape enemy : enemies) {
-			System.out.println("enemy");
 			for(AttackSparkle aa : aas) {
-				System.out.println("aa");
 				if(aa.shape.intersects(enemy) || enemy.contains(aa.shape)){
 					System.out.println("test");
 					aa.hasHitEnemy = true; 
@@ -112,6 +109,7 @@ public class GameHub extends GameObject{
 			}
 		}
 	}
+	
 	
 	public void checkIntersection(Faerie faerie, Deque<Stone> interactableObjs){
 		for(Stone shape : interactableObjs) {
