@@ -6,17 +6,13 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Ellipse;
 
-import de.faerix.base.stages.GameStage;
-
-public class StarFaerie implements FaerieState {
-	
-
-	public StarFaerie(Faerie faerie) {
+public class WitchFaerie implements FaerieState {
+	public WitchFaerie(Faerie faerie) {
 		try {
-			faerie.image = new Image("assets/starfaerie.png").getScaledCopy(68, 65);
-			faerie.leftWings = new Image("assets/left_wing_star.png").getScaledCopy(150, 150);
-			faerie.rightWings = new Image("assets/right_wing_star.png").getScaledCopy(150, 150);
-			faerie.sparkleImage = new Image("assets/faerie/star_sparkle.png", new Color(255,255,255,0.5f));
+			faerie.image = new Image("assets/witchfaerie.png").getScaledCopy(68, 65);
+			faerie.leftWings = new Image("assets/left_wing_witch.png").getScaledCopy(150, 150);
+			faerie.rightWings = new Image("assets/right_wing_witch.png").getScaledCopy(150, 150);
+			faerie.sparkleImage = new Image("assets/faerie/basic_sparkle.png", new Color(255,255,255,0.5f));
 			this.setStats(10, 0.5f, 100, 1, faerie);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block

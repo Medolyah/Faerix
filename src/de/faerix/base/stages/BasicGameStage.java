@@ -52,7 +52,8 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 		int field = 1 + (int) (Math.random() * ((800-1)));
 		
 		//to be replaced by actual stuff
-		this.interactableShapes.push(new Stone(StoneEnum.BLUE, field, field));
+		this.interactableShapes.push(new Stone(StoneEnum.RED, field, field));
+		this.interactableShapes.push(new Stone(StoneEnum.BLUE, field+100, field));
 		this.enemies.push(new Ellipse(field+30, field-90, 20, 50));
 
 	}
@@ -62,11 +63,14 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 		if(this.enemies.size() == 0) {
 			portal.render(g);			
 		}else {
-			g.fill(this.enemies.peek());			
+			g.fill(this.enemies.peek());			 
 		}
 		this.faerie.render(g);
 		this.gamehub.render(g);
-		this.interactableShapes.peek().render(g);
+		for( Stone shape : this.interactableShapes) {
+			shape.render(g);
+		}
+
 	}
 
 	public abstract int getID();
@@ -77,7 +81,9 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 			Input input = container.getInput();
 			this.gamehub.update(delta);
 			this.faerie.update(delta);
-			this.interactableShapes.peek().update(delta);
+			for( Stone shape : this.interactableShapes) {
+				shape.update(delta);
+			}
 			this.gamehub.checkInput(input, container, this.interactableShapes, faerie, this.portal, this, game, this.enemies);
 			this.gamehub.checkCollision(this.enemies, faerie);
 			this.gamehub.checkIfEnemyGotHit(this.enemies, faerie.shotAutoattacks);

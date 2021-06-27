@@ -13,7 +13,7 @@ public class NightskyStage extends  BasicGameStage implements GameStage{
 
 	public NightskyStage(StageEnum state){
 		super(state);
-		this.imageString = "assets/dawnstage_bg.png";
+		this.imageString = "assets/nightsky_bg.png";
 	}
 
 	public int getID() {

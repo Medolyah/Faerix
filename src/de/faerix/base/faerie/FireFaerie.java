@@ -48,13 +48,13 @@ public class FireFaerie implements FaerieState {
 
 	@Override
 	public void collectWaterStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		faerie.form = new WitchFaerie(faerie);
 
 	}
 
 	@Override
 	public void collectStarStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		faerie.form = new SunFaerie(faerie);
 
 	}
 

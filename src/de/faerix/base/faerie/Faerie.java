@@ -173,13 +173,19 @@ public class Faerie extends GameObject {
 	public void setMaxamunition(int i) {
 		this.maxAmunition = i;
 		this.amunition = i;
-	}	
+	}
+	
+	public void setMaxHp(int i) {
+		this.maxHp = i;
+		this.currentHp = i;
+	}
 	
 	
 	@Override
 	public void render(Graphics g) {
 		this.form.setSparkleColor(this, g);
 		this.renderSparkle(g);
+		g.setColor(Color.white);
 		g.fill(this.ellipse);
 		this.drawImage(g);
 		this.renderAutoattacks(g);

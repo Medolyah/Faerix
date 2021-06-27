@@ -52,20 +52,19 @@ public class WaterFaerie implements FaerieState {
 
 	@Override
 	public void collectFireStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		faerie.form = new WitchFaerie(faerie);
 
 	}
 
 	@Override
 	public void collectWaterStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		
 
 	}
 
 	@Override
 	public void collectStarStone(Faerie faerie) {
-		// TODO Auto-generated method stub
-
+		faerie.form = new NatureFaerie(faerie);
 	}
 
 
@@ -78,8 +77,10 @@ public class WaterFaerie implements FaerieState {
 
 	@Override
 	public void setStats(int maxAmunition, float velocity, int maxHp, int invinvibleDuration, Faerie faerie) {
-		// TODO Auto-generated method stub
-		faerie.setMaxamunition(10);
+		faerie.velocity = 0.4f;
+		faerie.setMaxHp(150);
+		faerie.setMaxamunition(15); 
+
 	}
 
 }
