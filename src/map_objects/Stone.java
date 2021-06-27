@@ -1,12 +1,13 @@
-package de.faerix.base;
+package map_objects;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Shape;
 
+import de.faerix.base.GameObject;
 import de.faerix.base.enums.StoneEnum;
 
-public class Stone extends Spielobjekt{
+public class Stone extends GameObject{
 	float xPos;
 	float yPos;
 	public StoneEnum type;

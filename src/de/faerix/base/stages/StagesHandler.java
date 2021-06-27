@@ -18,7 +18,6 @@ public class StagesHandler{
 	}
 	
 	public StagesHandler() {
-		System.out.print("a new one has been created"); 
 		for(StageEnum stage : arrayStageTypes) {
 			this.stageTypes.add(stage); 
 		}
@@ -39,6 +38,7 @@ public class StagesHandler{
 	public void createRandomStageOrder() {
 		for(int i = 0; i < levels; i ++) {
 			StageEnum randomStage = this.getRandomStage(levels-1-i);
+			System.out.println("Randomstage: " + randomStage); 
 			this.stages[i] = randomStage;
 		}
 

@@ -10,11 +10,13 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Ellipse;
 
-import de.faerix.base.Spielobjekt;
+import de.faerix.base.GameObject;
 import de.faerix.base.enums.Direction;
 import de.faerix.base.enums.StoneEnum;
+import gamehub.EnergyObserver;
+import gamehub.Subject;
 
-public class Faerie extends Spielobjekt {
+public class Faerie extends GameObject {
 	Image image, leftWings, rightWings;
 	Image sparkleImage;
 	public Ellipse ellipse;
@@ -26,14 +28,17 @@ public class Faerie extends Spielobjekt {
 	Image[] sparkles = new Image[50];
 	public FaerieState form;
 	Direction direction;
-	int maxHp;
-	public int currentHp = 50;
-	int amunition = 5, maxAmunition = 5;
-	public float velocity; 
-	Deque<AttackSparkle> shotAutoattacks = new ArrayDeque<AttackSparkle>();
+	public int maxHp = 5000;
+	public int currentHp = 5000;
+	public int amunition = 5;
+	public int maxAmunition = 5;
+	public float velocity;
+	public Deque<AttackSparkle> shotAutoattacks = new ArrayDeque<AttackSparkle>();
+	private boolean invincible;
+	public int invincibleDuration = 2000;
+	private int invincibleTimer = 0; 
 
 	public Faerie() {
-		System.out.println("new faerie has been created!"); 
 		this.form = new BasicFaerie(this);
 		this.ellipse = new Ellipse(this.xPosition, this.yPosition, 25, 25);
 		Random random = new Random();
@@ -88,7 +93,7 @@ public class Faerie extends Spielobjekt {
 	public void moveY(int yMove) {
 		if (yMove > 0) {
 			direction = Direction.South;
-			this.yPosition += yMove * (this.velocity-0.1f);
+			this.yPosition += yMove * (this.velocity - 0.1f);
 		} else {
 			direction = Direction.North;
 			this.yPosition += yMove * this.velocity;
@@ -100,8 +105,77 @@ public class Faerie extends Spielobjekt {
 	public void update(int delta) {
 		this.fall();
 		this.updateAutoattacks(delta);
+		
+//		if(this.invincibleTimer > 500) {
+//			try {
+//				this.image = new Image("assets/faerie.png").getScaledCopy(68, 65);
+//			} catch (SlickException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			};
+//		}
+		this.invincibleTimer++; 
+		if(this.invincibleDuration < this.invincibleTimer) {
+			this.invincible = false;
+		}
 	}
 
+
+
+	public void updateAutoattacks(int delta) {
+		for (AttackSparkle aa : this.shotAutoattacks) {
+			if (aa.isDead) {
+				this.shotAutoattacks.remove();
+				if (this.amunition <= this.maxAmunition) {
+					this.amunition++;
+				}
+			} else {
+				aa.update(delta);
+			}
+		}
+	}
+
+	public void collectSphere(StoneEnum stone) {
+		switch (stone) {
+		case BLUE:
+			this.form.collectWaterStone(this);
+			break;
+		case YELLOW:
+			this.form.collectStarStone(this);
+			break;
+		case RED:
+			this.form.collectFireStone(this);
+			break;
+		}
+
+	}
+
+
+
+	public void takeDamage(int hp){
+		if(!this.invincible) {
+			this.currentHp -= hp;
+			this.invincible = true; 
+			this.invincibleTimer = 0; 
+//			try {
+//				this.image = new Image("assets/firefaerie.png").getScaledCopy(68, 65);
+//			} catch (SlickException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+		}
+	}
+
+	public void autoattack() {
+		this.form.autoattack(this);
+	}
+
+	public void setMaxamunition(int i) {
+		this.maxAmunition = i;
+		this.amunition = i;
+	}	
+	
+	
 	@Override
 	public void render(Graphics g) {
 		this.form.setSparkleColor(this, g);
@@ -117,54 +191,11 @@ public class Faerie extends Spielobjekt {
 
 		}
 	}
-
-	public void updateAutoattacks(int delta) {
-		for (AttackSparkle aa : this.shotAutoattacks) {
-			if (aa.isDead) {
-				this.shotAutoattacks.remove();
-				if(this.amunition <= this.maxAmunition) {
-					this.amunition++;					
-				}
-			}else {
-				aa.update(delta);				
-			}
-		}
-	}
-
- 	public void collectSphere(StoneEnum stone) {
-		switch (stone) {
-		case BLUE:
-			this.form.collectWaterStone(this);
-			break;
-		case YELLOW:
-			this.form.collectStarStone(this);
-			break;
-		case RED:
-			this.form.collectFireStone(this);
-			break;
-		}
-
-	}
-
+	
 	public void renderSparkle(Graphics g) {
 		for (int i = 0; i < 50; i++) {
 			int size = 1 + (int) (Math.random() * ((15 - 1)));
 			g.drawImage(this.sparkleImage.getScaledCopy(size, size), this.fallingSparkX[i], this.fallingSparkY[i]);
 		}
-	}
-
-	public void takeDamage() {
-		this.currentHp += -1;
-
-	}
-
-	public void autoattack() {
-		this.form.autoattack(this);
-	}
-
-	public void setMaxamunition(int i) {
-		this.maxAmunition = i;
-		this.amunition = i;
-		
 	}
 }

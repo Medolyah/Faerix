@@ -33,11 +33,11 @@ public class BasicFaerie implements FaerieState {
 	@Override
 	public void autoattack(Faerie faerie) {
 		if(faerie.amunition > 0 ) {
-			System.out.print(faerie.direction);
 			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
 					(float)0.6, (float)600, faerie.sparkleImage, faerie.direction);
 			faerie.shotAutoattacks.add(aa);
 			aa.shoot(faerie.xPosition, faerie.yPosition);
+			System.out.println(faerie.amunition);
 			faerie.amunition--;
 		}
 	}

@@ -8,18 +8,18 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Shape;
 
-import de.faerix.base.Spielobjekt;
+import de.faerix.base.GameObject;
 import de.faerix.base.enums.Direction;
 
-public class AttackSparkle extends Spielobjekt{
+public class AttackSparkle extends GameObject{
 	
-	Shape shape;
+	public Shape shape;
 	float xPos;
 	float yPos;
 	float speed;
 	Image img; 
 	boolean isAttack;
-	boolean hasHitEnemy;
+    public boolean hasHitEnemy;
 	float rangeX; 
 	float rangeY;
 	boolean isDead = false;
@@ -78,6 +78,7 @@ public class AttackSparkle extends Spielobjekt{
 				this.isDead = true; 
 			}
 			if(this.hasHitEnemy) {
+				System.out.print("hallo");
 				this.yPos+= (1*(this.speed*2));
 				shape.setCenterY(this.yPos);
 				shape.setCenterX(this.xPos);

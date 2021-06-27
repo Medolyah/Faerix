@@ -16,15 +16,19 @@ import de.faerix.base.stages.MoonStage;
 import de.faerix.base.stages.NightskyStage;
 import de.faerix.base.stages.Prologue;
 import de.faerix.base.stages.StagesHandler;
+import gamehub.GameHub;
 
 import org.lwjgl.input.Mouse;
 
 
 public class Main extends StateBasedGame{
 	
+	public static final int CNTWIDTH = 1500;
+	public static final int CNTHEIGHT = 900;
 	public static final String gamename = "Faerix";
 	public static Music bgMusic;
 	public Faerie faerie;
+	private GameHub gamehub; 
 	public de.faerix.base.stages.StagesHandler stageHandler;
 
 
@@ -44,7 +48,7 @@ public class Main extends StateBasedGame{
 		//this.getState(StageEnum.Menu.getNumVal()).init(container, this);
 		this.faerie = new Faerie();
 		this.stageHandler = StagesHandler.getInstance();
-		System.out.println();
+		this.gamehub = GameHub.getInstance(faerie);
 		GameStage firstStage = (GameStage)this.getState(this.stageHandler.getNextLevelByInt(0));
 		firstStage.giveFaerie(this.faerie);
 		this.enterState(StageEnum.Menu.getNumVal());
@@ -55,7 +59,7 @@ public class Main extends StateBasedGame{
 		AppGameContainer appcontainer;
 		try {
 			appcontainer = new AppGameContainer(new Main(gamename));
-			appcontainer.setDisplayMode(1500, 900, false);
+			appcontainer.setDisplayMode(CNTWIDTH, CNTHEIGHT, false);
 			appcontainer.start();
 			
 		}catch(SlickException e) {
