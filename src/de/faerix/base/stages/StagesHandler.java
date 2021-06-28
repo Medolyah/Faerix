@@ -1,12 +1,15 @@
 package de.faerix.base.stages;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.List;
 import java.util.Random;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Shape;
 import de.faerix.base.enums.StageEnum;
+import map_objects.Enemy;
 
 
 public class StagesHandler{
@@ -28,7 +31,8 @@ public class StagesHandler{
 	}
 	
 	
-	private StageEnum[] arrayStageTypes = {StageEnum.DawnStage, StageEnum.MoonStage, StageEnum.NightskyStage};
+	private StageEnum[] arrayStageTypes = {StageEnum.DawnStage, StageEnum.MoonStage, StageEnum.NightskyStage, 
+			StageEnum.Desert, StageEnum.Sakura, StageEnum.Underwater};
 	List<StageEnum> stageTypes = new ArrayList<StageEnum>();
 	int levels = arrayStageTypes.length; 
 	StageEnum[] stages = new StageEnum[levels];
@@ -60,20 +64,15 @@ public class StagesHandler{
 
 	
 	public int nextStage(int currentLevel) {
-		System.out.println("NEXTSTAGE:" + this.levels);
 		if(currentLevel < this.levels ) {
 			return this.stages[currentLevel].getNumVal(); 			
 		}else
 			return StageEnum.Epilogue.getNumVal();
 	}
 	
-	public Shape[] getEnemies(int level) {
-		Shape[] shapes = new Shape[level*5];
-		for(int i = 0; i < level*5; i++) {
-			Shape shape = new Ellipse(0,0,0,0);
-			shapes[i]=shape;	
-		}
-		return shapes;
+	public int getEnemies(int level) {
+		System.out.println(level);
+		return (level+1) * 5;
 	}
 
 	public int getLevel(StageEnum state) {

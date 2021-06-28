@@ -6,6 +6,9 @@ public enum StageEnum {
 	DawnStage(2),
 	NightskyStage(3),
 	MoonStage(4),
+	Sakura(5),
+	Underwater(6),
+	Desert(7),
 	Epilogue(13),
 	Gameover(14);
 

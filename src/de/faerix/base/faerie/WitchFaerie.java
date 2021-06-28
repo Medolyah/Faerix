@@ -6,14 +6,16 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Ellipse;
 
+import de.faerix.base.enums.Direction;
+
 public class WitchFaerie implements FaerieState {
 	public WitchFaerie(Faerie faerie) {
 		try {
-			faerie.image = new Image("assets/witchfaerie.png").getScaledCopy(68, 65);
-			faerie.leftWings = new Image("assets/left_wing_witch.png").getScaledCopy(150, 150);
-			faerie.rightWings = new Image("assets/right_wing_witch.png").getScaledCopy(150, 150);
-			faerie.sparkleImage = new Image("assets/faerie/basic_sparkle.png", new Color(255,255,255,0.5f));
-			this.setStats(10, 0.5f, 100, 1, faerie);
+			faerie.image = new Image("assets/faerie/witchfaerie.png").getScaledCopy(68, 65);
+			faerie.leftWings = new Image("assets/faerie/left_wing_witch.png").getScaledCopy(150, 150);
+			faerie.rightWings = new Image("assets/faerie/right_wing_witch.png").getScaledCopy(150, 150);
+			faerie.sparkleImage = new Image("assets/faerie/witch_sparkle.png", new Color(255,255,255,0.5f));
+			this.setStats(15, 0.5f, 200, 0, faerie);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -21,18 +23,21 @@ public class WitchFaerie implements FaerieState {
 	}
 
 
-	@Override
-	public void autoattack(Faerie faerie) {
-		if(faerie.amunition > 0 ) {
-			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
-					(float)0.6, (float)600, faerie.sparkleImage, faerie.direction);
-			faerie.shotAutoattacks.add(aa);
-			aa.shoot(faerie.xPosition, faerie.yPosition);
-			System.out.println(faerie.amunition);
-			faerie.amunition--;
-		}
 
-	}
+	@Override
+	    public void autoattack(Faerie faerie) {
+	        Direction[] directions = {Direction.South, Direction.SouthWest, Direction.SouthEast};
+	        if(faerie.amunition > 2 ) {
+	            for(int i = 0; i<3; i++) {
+	                AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
+	                        (float)0.6, (float)600, faerie.sparkleImage, directions[i]);
+	                faerie.shotAutoattacks.add(aa);
+	                aa.shoot(faerie.xPosition, faerie.yPosition);
+	                faerie.amunition--;
+	            }
+
+	        }
+	    }
 
 	@Override
 	public void ultattack(Faerie faeire) {

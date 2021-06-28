@@ -13,9 +13,9 @@ public class WaterFaerie implements FaerieState {
 
 	public WaterFaerie(Faerie faerie) {
 		try {
-			faerie.image = new Image("assets/waterfaerie.png").getScaledCopy(68, 65);
-			faerie.leftWings = new Image("assets/left_wing_water.png").getScaledCopy(150, 150);
-			faerie.rightWings = new Image("assets/right_wing_water.png").getScaledCopy(150, 150);
+			faerie.image = new Image("assets/faerie/waterfaerie.png").getScaledCopy(68, 65);
+			faerie.leftWings = new Image("assets/faerie/left_wing_water.png").getScaledCopy(150, 150);
+			faerie.rightWings = new Image("assets/faerie/right_wing_water.png").getScaledCopy(150, 150);
 			faerie.sparkleImage = new Image("assets/faerie/water_sparkle.png", new Color(255,255,255,0.5f));
 			//this.setStats(faerie);
 		} catch (SlickException e) {

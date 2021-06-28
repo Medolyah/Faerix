@@ -8,6 +8,7 @@ import org.newdawn.slick.state.*;
 import de.faerix.base.enums.StageEnum;
 import de.faerix.base.faerie.Faerie;
 import de.faerix.base.stages.DawnStage;
+import de.faerix.base.stages.DesertStage;
 import de.faerix.base.stages.Epilogue;
 import de.faerix.base.stages.GameOver;
 import de.faerix.base.stages.GameStage;
@@ -15,7 +16,9 @@ import de.faerix.base.stages.Menu;
 import de.faerix.base.stages.MoonStage;
 import de.faerix.base.stages.NightskyStage;
 import de.faerix.base.stages.Prologue;
+import de.faerix.base.stages.SakuraStage;
 import de.faerix.base.stages.StagesHandler;
+import de.faerix.base.stages.UnderwaterStage;
 import gamehub.GameHub;
 
 import org.lwjgl.input.Mouse;
@@ -39,6 +42,9 @@ public class Main extends StateBasedGame{
 		this.addState(new DawnStage(StageEnum.DawnStage));
 		this.addState(new NightskyStage(StageEnum.NightskyStage));
 		this.addState(new MoonStage(StageEnum.MoonStage));
+		this.addState(new DesertStage(StageEnum.Desert));
+		this.addState(new SakuraStage(StageEnum.Sakura));
+		this.addState(new UnderwaterStage(StageEnum.Underwater));
 		this.addState(new Epilogue(StageEnum.Epilogue));
 		this.addState(new GameOver(StageEnum.Gameover));
 	}

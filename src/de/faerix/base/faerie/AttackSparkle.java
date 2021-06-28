@@ -26,6 +26,7 @@ public class AttackSparkle extends GameObject{
 	private int yDirection;
 	private int xDirection; 
 	private Direction direction; 
+	public int damage = 10;
 	
 	
 	

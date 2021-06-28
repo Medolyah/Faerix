@@ -11,10 +11,10 @@ public class FireFaerie implements FaerieState {
 
 	public FireFaerie(Faerie faerie) {
 		try {
-			faerie.image = new Image("assets/firefaerie.png").getScaledCopy(68, 65);
-			faerie.leftWings = new Image("assets/left_wing_fire.png").getScaledCopy(150, 150);
-			faerie.rightWings = new Image("assets/right_wing_fire.png").getScaledCopy(150, 150);
-			faerie.sparkleImage = new Image("assets/faerie/fire_sparkle.png", new Color(255,255,255,0.5f));
+			faerie.image = new Image("assets/faerie/firefaerie.png").getScaledCopy(68, 65);
+			faerie.leftWings = new Image("assets/faerie/left_wing_fire.png").getScaledCopy(150, 150);
+			faerie.rightWings = new Image("assets/faerie/right_wing_fire.png").getScaledCopy(150, 150);
+			faerie.sparkleImage = new Image("assets/faerie/fire_sparkle.png", new Color(255, 255, 255, 0.5f));
 			System.out.print("firefaerie");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
@@ -22,12 +22,20 @@ public class FireFaerie implements FaerieState {
 		}
 	}
 
-
 	@Override
-	public void autoattack(Faerie faeire) {
-		// TODO Auto-generated method stub
+	public void autoattack(Faerie faerie) {
+		if (faerie.amunition > 0) {
+			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5), (float) 1.5,
+					(float) 600, faerie.sparkleImage, faerie.direction);
+			faerie.shotAutoattacks.add(aa);
+			aa.shoot(faerie.xPosition, faerie.yPosition);
+			System.out.println(faerie.amunition);
+			faerie.amunition--;
+		}
 
 	}
+
+
 
 	@Override
 	public void ultattack(Faerie faeire) {
@@ -58,17 +66,15 @@ public class FireFaerie implements FaerieState {
 
 	}
 
-
 	@Override
 	public void setSparkleColor(Faerie faerie, Graphics g) {
-		///faerie.SparkleImage = new Image("firesparkle.png")
+		/// faerie.SparkleImage = new Image("firesparkle.png")
 	}
-
 
 	@Override
 	public void setStats(int maxAmunition, float velocity, int maxHp, int invinvibleDuration, Faerie faerie) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

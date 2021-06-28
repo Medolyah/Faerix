@@ -10,10 +10,10 @@ public class SunFaerie implements FaerieState {
 
 	public SunFaerie(Faerie faerie) {
 		try {
-			faerie.image = new Image("assets/sunfaerie.png").getScaledCopy(68, 65);
-			faerie.leftWings = new Image("assets/left_wing_sun.png").getScaledCopy(150, 150);
-			faerie.rightWings = new Image("assets/right_wing_sun.png").getScaledCopy(150, 150);
-			faerie.sparkleImage = new Image("assets/faerie/basic_sparkle.png", new Color(255, 255, 255, 0.5f));
+			faerie.image = new Image("assets/faerie/sunfaerie.png").getScaledCopy(68, 65);
+			faerie.leftWings = new Image("assets/faerie/left_wing_sun.png").getScaledCopy(150, 150);
+			faerie.rightWings = new Image("assets/faerie/right_wing_sun.png").getScaledCopy(150, 150);
+			faerie.sparkleImage = new Image("assets/faerie/sun_sparkle.png", new Color(255, 255, 255, 0.5f));
 			this.setStats(10, 0.5f, 100, 1, faerie);
 			// this.setStats(faerie);
 		} catch (SlickException e) {

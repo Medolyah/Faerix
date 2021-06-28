@@ -1,7 +1,10 @@
 package gamehub;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.Iterator;
+import java.util.List;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -17,6 +20,7 @@ import de.faerix.base.faerie.AttackSparkle;
 import de.faerix.base.faerie.Faerie;
 import de.faerix.base.stages.GameStage;
 import de.faerix.base.stages.StagesHandler;
+import map_objects.Enemy;
 import map_objects.Portal;
 import map_objects.Stone;
 
@@ -49,8 +53,8 @@ public class GameHub extends GameObject{
 		this.display.setHpDivider(this.faerie.maxHp);
 	}
 
-	public void checkInput(Input input, GameContainer container, Deque<Stone> interactableObjs,
-			Faerie faerie, Portal portal, GameStage stage, StateBasedGame game, Deque<Shape> enemies) {
+	public void checkInput(Input input, GameContainer container, List<Stone> interactableObjs,
+			Faerie faerie, Portal portal, GameStage stage, StateBasedGame game, List<Enemy> enemies) {
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			container.exit();
 		} else if (input.isKeyDown(Input.KEY_UP)) {
@@ -79,46 +83,35 @@ public class GameHub extends GameObject{
 			this.checkIntersection(faerie, interactableObjs);
 			this.intersectionPortal(portal, stage, game);
 		}
-
 	}
 	
 	private void intersectionPortal(Portal portal, GameStage stage, StateBasedGame  game) {
-		if(portal.shape.intersects(faerie.ellipse) || portal.shape.contains(faerie.ellipse)) {
-			stage.goToNextLevel(game); 
+		if(portal.isAlive) {
+			if(portal.shape.intersects(faerie.ellipse) || portal.shape.contains(faerie.ellipse)) {
+				stage.goToNextLevel(game); 
+			}			
 		}
 		
 	}
 
-	public void checkCollision( Deque<Shape> enemies, Faerie faerie){
-		for(Shape enemy : enemies) {
-			if(faerie.ellipse.intersects(enemy)) {
+	public void checkCollision( List<Enemy> enemies, Faerie faerie){
+		for(Enemy enemy : enemies) {
+			if(faerie.ellipse.intersects(enemy.shape) || enemy.shape.contains(faerie.ellipse)) {
 				faerie.takeDamage(5); 
 				display.setHp(faerie.currentHp);
 			}
 		}
 	}
-	
-	public void checkIfEnemyGotHit( Deque<Shape> enemies, Deque<AttackSparkle> aas){
-		for(Shape enemy : enemies) {
-			for(AttackSparkle aa : aas) {
-				if(aa.shape.intersects(enemy) || enemy.contains(aa.shape)){
-					System.out.println("test");
-					aa.hasHitEnemy = true; 
-					enemies.remove();
-				}
-			}
-		}
-	}
+
 	
 	
-	public void checkIntersection(Faerie faerie, Deque<Stone> interactableObjs){
-		for(Stone shape : interactableObjs) {
-			if(faerie.ellipse.intersects(shape.shape)){
-				if( shape instanceof  Stone) {
-					Stone stone = (Stone)shape; 
+	public void checkIntersection(Faerie faerie, List<Stone> stones){
+		for(int i=stones.size()-1;i>=0;i--) {
+			if(faerie.ellipse.intersects(stones.get(i).shape) || faerie.ellipse.contains(stones.get(i).shape)){
+					Stone stone = stones.get(i); 
 					faerie.collectSphere(stone.type);
 					this.updateDisplayWithFaerie();
-				}
+					stones.remove(stone);
 			}
 		}
 	}
@@ -127,6 +120,7 @@ public class GameHub extends GameObject{
 	public void update( int delta) {
 		this.display.update(delta);
 		this.qButton.update(delta);
+
 	}
 	
 	public void render(Graphics g) {
