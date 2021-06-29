@@ -32,9 +32,9 @@ public class NatureFaerie implements FaerieState {
 	public void autoattack(Faerie faerie) {
 		// TODO Auto-generated method stub
 		if(faerie.amunition > 0 ) {
-			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
+			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 20),
 					(float)0.6, (float)600, faerie.sparkleImage, Direction.East, this.sound, 5);
-			AttackSparkle aa2 = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
+			AttackSparkle aa2 = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 20),
 					(float)0.6, (float)600, faerie.sparkleImage, Direction.West, this.sound, 5);
 			faerie.shotAutoattacks.add(aa);
 			aa.shoot(faerie.xPosition, faerie.yPosition);

@@ -36,7 +36,7 @@ public class SunFaerie implements FaerieState {
 		if (faerie.amunition > 0) {
 			for(int i = 0; i <5 ; i++) {
 				AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 4, 5), (float) 0.6,
-						(float) 600, faerie.sparkleImage, direction[i], sound, 10);
+						(float) 600, faerie.sparkleImage, direction[i], sound, 15);
 				faerie.shotAutoattacks.add(aa);
 				aa.shoot(faerie.xPosition, faerie.yPosition);				
 				faerie.amunition--;

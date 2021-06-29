@@ -36,7 +36,7 @@ public class WitchFaerie implements FaerieState {
 	        Direction[] directions = {Direction.South, Direction.SouthWest, Direction.SouthEast};
 	        if(faerie.amunition > 2 ) {
 	            for(int i = 0; i<3; i++) {
-	                AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
+	                AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 25),
 	                        (float)0.6, (float)600, faerie.sparkleImage, directions[i], this.sound, 3);
 	                faerie.shotAutoattacks.add(aa);
 	                aa.shoot(faerie.xPosition, faerie.yPosition);
