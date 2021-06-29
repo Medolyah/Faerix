@@ -20,7 +20,7 @@ public class WaterFaerie implements FaerieState {
 			faerie.rightWings = new Image("assets/faerie/right_wing_water.png").getScaledCopy(150, 150);
 			faerie.sparkleImage = new Image("assets/faerie/water_sparkle.png", new Color(255,255,255,0.5f));
 			//this.setStats(faerie);
-			this.sound = new Sound("assets/sound/faerie/water.wav");
+			this.sound = new Sound("assets/sound/faerie/water.mp3");
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
