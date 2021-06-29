@@ -79,7 +79,6 @@ public class AttackSparkle extends GameObject{
 				this.isDead = true; 
 			}
 			if(this.hasHitEnemy) {
-				System.out.print("hallo");
 				this.yPos+= (1*(this.speed*2));
 				shape.setCenterY(this.yPos);
 				shape.setCenterX(this.xPos);
@@ -111,9 +110,7 @@ public class AttackSparkle extends GameObject{
 	
 	// Directions
 	private float getYRange(float yPos) {
-		System.out.print(direction);
 		if(direction == Direction.North || direction == Direction.NorthWest || direction == Direction.NorthEast) {
-			System.out.print(yPos-this.rangeY);
 			return yPos-this.rangeY;
 		}
 		else return yPos + this.rangeY;

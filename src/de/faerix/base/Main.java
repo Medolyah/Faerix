@@ -7,8 +7,10 @@ import org.newdawn.slick.state.*;
 
 import de.faerix.base.enums.StageEnum;
 import de.faerix.base.faerie.Faerie;
+import de.faerix.base.stages.Credits;
 import de.faerix.base.stages.DawnStage;
 import de.faerix.base.stages.DesertStage;
+import de.faerix.base.stages.EndingStage;
 import de.faerix.base.stages.Epilogue;
 import de.faerix.base.stages.GameOver;
 import de.faerix.base.stages.GameStage;
@@ -45,7 +47,9 @@ public class Main extends StateBasedGame{
 		this.addState(new DesertStage(StageEnum.Desert));
 		this.addState(new SakuraStage(StageEnum.Sakura));
 		this.addState(new UnderwaterStage(StageEnum.Underwater));
+		this.addState(new EndingStage(StageEnum.Ending));
 		this.addState(new Epilogue(StageEnum.Epilogue));
+		this.addState(new Credits());
 		this.addState(new GameOver(StageEnum.Gameover));
 	}
 	

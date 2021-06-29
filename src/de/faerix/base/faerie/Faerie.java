@@ -37,6 +37,7 @@ public class Faerie extends GameObject {
 	private boolean invincible;
 	public int invincibleDuration = 2000;
 	private int invincibleTimer = 0; 
+	public Color color; 
 
 	public Faerie() {
 		this.form = new BasicFaerie(this);
@@ -58,7 +59,7 @@ public class Faerie extends GameObject {
 		if (direction == Direction.South || direction == Direction.North || direction == Direction.West) {
 			g.drawImage(this.rightWings, this.xPosition - 75, this.yPosition - 85);
 		}
-		g.drawImage(this.image, this.xPosition - 32, this.yPosition - 28);
+		g.drawImage(this.image, this.xPosition - 32, this.yPosition - 30);
 
 	}
 
@@ -185,7 +186,7 @@ public class Faerie extends GameObject {
 	public void render(Graphics g) {
 		this.form.setSparkleColor(this, g);
 		this.renderSparkle(g);
-		g.setColor(Color.white);
+		g.setColor(this.color);
 		g.fill(this.ellipse);
 		this.drawImage(g);
 		this.renderAutoattacks(g);

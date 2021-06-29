@@ -73,7 +73,7 @@ public class Stone extends GameObject {
 	private StoneEnum getType() {
 		Random random = new Random();
 		StoneEnum[] stones = {StoneEnum.RED, StoneEnum.BLUE, StoneEnum.YELLOW};
-		return stones[random.nextInt(2)];
+		return stones[random.nextInt(3)];
 		
 	}
 }

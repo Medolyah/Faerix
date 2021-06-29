@@ -25,27 +25,22 @@ public class StagesHandler{
 			this.stageTypes.add(stage); 
 		}
 		this.createRandomStageOrder();
-		for(StageEnum stage : arrayStageTypes) {
-			System.out.print(stage); 
-		}
 	}
 	
 	
-	private StageEnum[] arrayStageTypes = {StageEnum.DawnStage, StageEnum.MoonStage, StageEnum.NightskyStage, 
-			StageEnum.Desert, StageEnum.Sakura, StageEnum.Underwater};
+	private StageEnum[] arrayStageTypes = {StageEnum.DawnStage, StageEnum.NightskyStage, StageEnum.MoonStage, StageEnum.Sakura, StageEnum.Underwater, StageEnum.Desert};
 	List<StageEnum> stageTypes = new ArrayList<StageEnum>();
 	int levels = arrayStageTypes.length; 
-	StageEnum[] stages = new StageEnum[levels];
+	StageEnum[] stages = new StageEnum[levels+1];
 	
 	int currentLevel = 0; 
 	
 	public void createRandomStageOrder() {
 		for(int i = 0; i < levels; i ++) {
-			StageEnum randomStage = this.getRandomStage(levels-1-i);
-			System.out.println("Randomstage: " + randomStage); 
+			StageEnum randomStage = this.getRandomStage(levels-1-i); 
 			this.stages[i] = randomStage;
 		}
-
+		this.stages[stages.length-1] = StageEnum.Ending;
 	}
 	
 	public StageEnum getRandomStage(int i) {
@@ -67,24 +62,22 @@ public class StagesHandler{
 		if(currentLevel < this.levels ) {
 			return this.stages[currentLevel].getNumVal(); 			
 		}else
-			return StageEnum.Epilogue.getNumVal();
+			return StageEnum.Ending.getNumVal();
 	}
 	
 	public int getEnemies(int level) {
-		System.out.println(level);
 		return (level+1) * 5;
 	}
 
 	public int getLevel(StageEnum state) {
-		Arrays.asList(this.stages).indexOf(state);
 		return Arrays.asList(this.stages).indexOf(state)+1;
 	}
 	
 	public int getNextLevelByInt(int level) {
-		if(level < this.levels) {
-			Arrays.asList(this.stages).get(level);			
-			return Arrays.asList(this.stages).get(level).getNumVal();}
-			else return Arrays.asList(this.stages).get(level-1).getNumVal();  // to give faerie back to the own stage ffs im so done i dont want to anymore
+		if(level < this.levels+1) {		
+			return Arrays.asList(this.stages).get(level).getNumVal();
+		}
+		else return Arrays.asList(this.stages).get(level-1).getNumVal();
 	}
 	
 

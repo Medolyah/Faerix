@@ -54,7 +54,7 @@ public class Prologue extends BasicGameState{
 		// TODO Auto-generated method stub
 		String string = "To whomever this reaches... \n"
 				+ "This letter comes from a place of deep urgency... We need your help!  \n"
-				+ "Our kingdom Eryluh has been attacked by some uttermost horrible creatures! \n"
+				+ "Our kingdom Eryluh has been attacked by some utmost horrible creatures! \n"
 				+ "If we do nothing, they will destroy our beautiful lands... \n"
 				+ "You have to help us... ";
 		time++;

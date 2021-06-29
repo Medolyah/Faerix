@@ -9,8 +9,10 @@ public enum StageEnum {
 	Sakura(5),
 	Underwater(6),
 	Desert(7),
+	Ending(12),
 	Epilogue(13),
-	Gameover(14);
+	Gameover(14),
+	Credits(15);
 
 	
 	 private int numVal;

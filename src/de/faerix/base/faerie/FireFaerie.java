@@ -15,7 +15,7 @@ public class FireFaerie implements FaerieState {
 			faerie.leftWings = new Image("assets/faerie/left_wing_fire.png").getScaledCopy(150, 150);
 			faerie.rightWings = new Image("assets/faerie/right_wing_fire.png").getScaledCopy(150, 150);
 			faerie.sparkleImage = new Image("assets/faerie/fire_sparkle.png", new Color(255, 255, 255, 0.5f));
-			System.out.print("firefaerie");
+			faerie.color = new Color(252, 0.2f, 0.2f, 0.2f);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -39,7 +39,8 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 	public float xPos;
 	public StageEnum state;
 	public String imageString;
-	private int amtEnemies;
+	private int amtEnemies = 5;
+	private int timer;
 
 	public BasicGameStage(StageEnum state) {
 		this.state = state;
@@ -58,11 +59,10 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 
 	public void render(GameContainer gc, StateBasedGame sbg, Graphics g) throws SlickException {
 		g.drawImage(this.startBild, this.xPos, 0);
-		if (this.amtEnemies == 0) {
+		this.spawnEnemies(g);
+		if (this.amtEnemies <= 0) {
 			portal.render(g);
-		} else {
-			this.spawnEnemies(g);
-		}
+		} 
 		this.faerie.render(g);
 		this.gamehub.render(g);
 		for (Stone shape : this.interactableShapes) {
@@ -82,31 +82,44 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 	@Override
 	public void update(GameContainer container, StateBasedGame game, int delta) throws SlickException {
 		Input input = container.getInput();
+		
 		this.gamehub.update(delta);
+		
 		this.faerie.update(delta);
+		
 		for (Stone shape : this.interactableShapes) {
 			shape.update(delta);
 		}
+		
 		this.gamehub.checkInput(input, container, this.interactableShapes, faerie, this.portal, this, game,
 				this.enemies);
-		this.gamehub.checkCollision(this.enemies, faerie);
+		
 		this.checkIfEnemyGotHit(this.enemies, faerie.shotAutoattacks);
+		
+		this.timer ++;
+		if(this.timer % 1000 == 1 && this.enemies.size() < 10) {
+			this.timer = 0;
+			this.addEnemies(1);
+		}
+		this.moveEnemy(delta);
 		if (this.faerie.currentHp <= 0) {
 			game.enterState(StageEnum.Gameover.getNumVal());
 		}
-		this.moveEnemy();
-		for (Enemy enemy : this.enemies) {
-			enemy.update(delta);
-		}
-		if(enemies.size() <= 3) {
-			this.addEnemies(5);
+
+		if(this.amtEnemies == 0 && this.enemies.size() == 0) {
+			this.portal.isAlive = true;			
 		}
 
 	}
 
-	private void moveEnemy() {
+	private void moveEnemy(int delta) {
 		for (Enemy enemy : this.enemies) {
 			enemy.move(this.faerie.xPosition, this.faerie.yPosition);
+			enemy.update(delta);
+			if(faerie.ellipse.intersects(enemy.shape) || enemy.shape.contains(faerie.ellipse)) {
+				faerie.takeDamage(5); 
+				this.gamehub.display.setHp(faerie.currentHp);
+			}
 		}
 
 	}
@@ -137,16 +150,20 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 		int actualAmt; 
 		if(amt < this.amtEnemies) actualAmt = amt;
 		else actualAmt = this.amtEnemies;
-		for(int i = 0; i < amt; i++) {
+		for(int i = 0; i < actualAmt; i++) {
 			this.enemies.add(new Enemy(150));			
 		}
+		
 		this.amtEnemies -= actualAmt;
+
+		
 	}
 
 	public void goToNextLevel(StateBasedGame game) {
 		int nextLevel = this.handler.getNextLevelByInt(this.level);
 		GameStage nextStage = (GameStage) game.getState(nextLevel);
 		nextStage.giveFaerie(this.faerie);
+		System.out.println("Go to" + nextLevel);
 		game.enterState(this.handler.nextStage(this.level));
 	}
 

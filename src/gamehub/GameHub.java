@@ -93,16 +93,6 @@ public class GameHub extends GameObject{
 		}
 		
 	}
-
-	public void checkCollision( List<Enemy> enemies, Faerie faerie){
-		for(Enemy enemy : enemies) {
-			if(faerie.ellipse.intersects(enemy.shape) || enemy.shape.contains(faerie.ellipse)) {
-				faerie.takeDamage(5); 
-				display.setHp(faerie.currentHp);
-			}
-		}
-	}
-
 	
 	
 	public void checkIntersection(Faerie faerie, List<Stone> stones){

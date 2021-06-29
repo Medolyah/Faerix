@@ -13,8 +13,6 @@ import de.faerix.base.GameObject;
 import de.faerix.base.enums.ContainerSize;
 
 public class Enemy extends GameObject{
-	
-
 	public float xPos;
 	public float yPos;
 	public Image img;
@@ -41,10 +39,9 @@ public class Enemy extends GameObject{
 			this.damageImg = new Image("assets/map_objects/enemy_dmg.png").getScaledCopy(size, size);
 			this.normalImg = new Image("assets/map_objects/enemy.png").getScaledCopy(size, size);
 		} catch (SlickException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		if(random.nextInt(100) < 20) this.hasStone = true; 
+		if(random.nextInt(100) < 5) this.hasStone = true; 
 	}
 	
 	public void move(float faerieX, float faerieY) {

@@ -19,7 +19,7 @@ public class Portal extends GameObject{
 	public Image outerRing, innerRing; 
 	public int xPos;
 	public int yPos;
-	public boolean isAlive = true;
+	public boolean isAlive = false;
 	
 	private int size; 
 	public Portal() throws SlickException {
