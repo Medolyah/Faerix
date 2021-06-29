@@ -50,7 +50,7 @@ public class Enemy extends GameObject {
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		if (random.nextInt(100) < 80)
+		if (random.nextInt(100) < 5)
 			this.hasStone = true;
 	}
 
