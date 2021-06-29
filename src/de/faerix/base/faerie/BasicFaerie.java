@@ -19,7 +19,7 @@ public class BasicFaerie implements FaerieState {
 			faerie.leftWings = new Image("assets/faerie/left_wing_water.png").getScaledCopy(150, 150);
 			faerie.rightWings = new Image("assets/faerie/right_wing_water.png").getScaledCopy(150, 150);
 			faerie.sparkleImage = new Image("assets/faerie/basic_sparkle.png");
-
+			faerie.color = new Color(255f, 255f, 255f, 0.2f);
 			
 			this.setStats(10, 0.5f, 50, 1, faerie);
 			

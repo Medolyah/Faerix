@@ -18,6 +18,7 @@ public class NatureFaerie implements FaerieState {
 			faerie.sparkleImage = new Image("assets/faerie/nature_sparkle.png", new Color(255,255,255,0.5f));
 			this.setStats(10, 0.5f, 100, 1, faerie);
 			this.sound = new Sound("assets/sound/faerie/nature.wav");
+			faerie.color = new Color(184, 222, 135, 0.2f);
 			//this.setStats(faerie);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block

@@ -20,7 +20,8 @@ public class StarFaerie implements FaerieState {
 			faerie.rightWings = new Image("assets/faerie/right_wing_star.png").getScaledCopy(150, 150);
 			faerie.sparkleImage = new Image("assets/faerie/star_sparkle.png", new Color(255,255,255,0.5f));
 			this.setStats(10, 0.5f, 100, 1, faerie);
-			this.sound = new Sound("assets/sound/faerie/firespell.wav");
+			this.sound = new Sound("assets/sound/faerie/star_.wav");
+			faerie.color = new Color(255f, 0.9f, 176f, 0.2f);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

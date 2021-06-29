@@ -22,6 +22,7 @@ public class WitchFaerie implements FaerieState {
 			faerie.sparkleImage = new Image("assets/faerie/witch_sparkle.png", new Color(255,255,255,0.5f));
 			this.setStats(15, 0.5f, 200, 0, faerie);
 			this.sound = new Sound("assets/sound/faerie/witch.wav");
+			faerie.color = new Color(188, 151, 222, 0.2f);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

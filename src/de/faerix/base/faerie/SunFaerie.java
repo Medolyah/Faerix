@@ -18,7 +18,8 @@ public class SunFaerie implements FaerieState {
 			faerie.rightWings = new Image("assets/faerie/right_wing_sun.png").getScaledCopy(150, 150);
 			faerie.sparkleImage = new Image("assets/faerie/sun_sparkle.png", new Color(255, 255, 255, 0.5f));
 			this.setStats(10, 0.5f, 100, 1, faerie);
-			 this.sound = new Sound("assets/sound/faerie/firespell.wav");
+			 this.sound = new Sound("assets/sound/faerie/sun-2.wav");
+				faerie.color = new Color(255f, 188f, 0.2f, 0.2f); 
 			// this.setStats(faerie);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block

@@ -41,7 +41,7 @@ public class Enemy extends GameObject{
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}
-		if(random.nextInt(100) < 5) this.hasStone = true; 
+		if(random.nextInt(100) < 80) this.hasStone = true; 
 	}
 	
 	public void move(float faerieX, float faerieY) {
