@@ -40,11 +40,18 @@ public class Faerie extends GameObject {
 	public int invincibleDuration = 2000;
 	private int invincibleTimer = 0; 
 	public Color color; 
+	private Sound dmgSound; 
 
 	public Faerie() {
 		this.form = new BasicFaerie(this);
 		this.ellipse = new Ellipse(this.xPosition, this.yPosition, 25, 25);
 		Random random = new Random();
+		try {
+			this.dmgSound = new Sound("assets/sound/faerie/dmgi.wav");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		this.direction = Direction.East;
 		for (int i = 0; i < 50; i++) {
 			this.fallingSparkX[i] = this.xPosition - 25 + (float) random.nextInt(50);
@@ -62,7 +69,6 @@ public class Faerie extends GameObject {
 			g.drawImage(this.rightWings, this.xPosition - 75, this.yPosition - 85);
 		}
 		g.drawImage(this.image, this.xPosition - 32, this.yPosition - 30);
-
 	}
 
 	public void updateImage() {
@@ -160,6 +166,7 @@ public class Faerie extends GameObject {
 			this.currentHp -= hp;
 			this.invincible = true; 
 			this.invincibleTimer = 0; 
+			this.dmgSound.play();
 //			try {
 //				this.image = new Image("assets/firefaerie.png").getScaledCopy(68, 65);
 //			} catch (SlickException e) {

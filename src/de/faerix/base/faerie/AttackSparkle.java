@@ -27,15 +27,15 @@ public class AttackSparkle extends GameObject{
 	private int yDirection;
 	private int xDirection; 
 	private Direction direction; 
-	public int damage = 10;
+	public int damage;
 	private Sound sound;
 	
 	
 	
 	//sparkles
-	private float[] fallingSparkX = new float[10];
-	private float[] fallingSparkY = new float[10];
-	private int[] stopping = new int[10];
+	private float[] fallingSparkX = new float[5];
+	private float[] fallingSparkY = new float[5];
+	private int[] stopping = new int[5];
 	
 	
 	public AttackSparkle(Shape shape, float speed, float range,  Image img, Direction direction, Sound sound, int damage) {
@@ -99,7 +99,7 @@ public class AttackSparkle extends GameObject{
 			g.fill(shape);
 			g.drawImage(img, this.xPos-shape.getWidth(), this.yPos-shape.getHeight());
 			
-			for (int i = 0; i < 10; i++) {
+			for (int i = 0; i < 5; i++) {
 				int size = 1 + (int) (Math.random() * ((15 - 1)));
 				g.drawImage(this.img.getScaledCopy(size, size), this.fallingSparkX[i], this.fallingSparkY[i]);
 			}
@@ -159,7 +159,7 @@ public class AttackSparkle extends GameObject{
 	
 	public void initSparkles(){
 		Random random = new Random();
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			this.fallingSparkX[i] = this.xPos - 25 + (float) random.nextInt(10);
 			this.fallingSparkY[i] = this.yPos - 25 + (float) random.nextInt(10);
 			this.stopping[i] = 10 + (int) random.nextInt(25);
@@ -167,7 +167,7 @@ public class AttackSparkle extends GameObject{
 		
 	}
 	public void sparkle(){
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < 5; i++) {
 			Random random = new Random();
 			if (this.fallingSparkY[i] > this.yPos + this.stopping[i]) {
 				this.fallingSparkY[i] = this.yPos - (float) random.nextInt(20);

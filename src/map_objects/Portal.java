@@ -6,6 +6,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -29,7 +30,6 @@ public class Portal extends GameObject{
 		Random random = new Random();
 		this.xPos = random.nextInt(gameWidth-size); 
 		this.yPos =  random.nextInt(gameHeight-200-size); 
-		
 		this.shape = new Ellipse(this.xPos, this.yPos, size/4, size/4);
 	}
 	
@@ -44,8 +44,8 @@ public class Portal extends GameObject{
 		}
 	}
 	
+	
 	public void update(int delta) {
-		
 	}
 
 }

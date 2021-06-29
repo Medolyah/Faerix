@@ -140,7 +140,7 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 	public void checkIfEnemyGotHit( List<Enemy> enemies, Deque<AttackSparkle> aas){
 		for(AttackSparkle aa : aas) {
 			for(int i=enemies.size()-1;i>=0;i--) {
-				if(aa.shape.intersects(enemies.get(i).shape) || enemies.get(i).shape.contains(aa.shape)){
+				if(aa.shape.intersects(enemies.get(i).shape)){
 					aa.hasHitEnemy = true; 
 					enemies.get(i).takeDamage(aa.damage);
 					if(enemies.get(i).isDead) {
@@ -164,7 +164,7 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 		if(amt < this.amtEnemies) actualAmt = amt;
 		else actualAmt = this.amtEnemies;
 		for(int i = 0; i < actualAmt; i++) {
-			this.enemies.add(new Enemy(150));			
+			this.enemies.add(new Enemy());			
 		}
 		
 		this.amtEnemies -= actualAmt;

@@ -19,6 +19,7 @@ public class FireFaerie implements FaerieState {
 			faerie.sparkleImage = new Image("assets/faerie/fire_sparkle.png", new Color(255, 255, 255, 0.5f));
 			this.sound = new Sound("assets/sound/faerie/fire.wav");
 			faerie.color = new Color(252, 0.2f, 0.2f, 0.2f);
+			this.setStats(20, 0.9f, 25, 1000, faerie);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,7 +31,7 @@ public class FireFaerie implements FaerieState {
 
 		if (faerie.amunition > 0) {
 			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5), (float) 1.5,
-					(float) 600, faerie.sparkleImage, faerie.direction, sound, 5);
+					(float) 600, faerie.sparkleImage, faerie.direction, sound, 15);
 			faerie.shotAutoattacks.add(aa);
 			aa.shoot(faerie.xPosition, faerie.yPosition);
 			System.out.println(faerie.amunition);
@@ -77,7 +78,10 @@ public class FireFaerie implements FaerieState {
 
 	@Override
 	public void setStats(int maxAmunition, float velocity, int maxHp, int invinvibleDuration, Faerie faerie) {
-		// TODO Auto-generated method stub
+		faerie.setMaxamunition(maxAmunition);
+		faerie.velocity = velocity;
+		faerie.setMaxHp( maxHp);
+		faerie.invincibleDuration = invinvibleDuration;
 
 	}
 

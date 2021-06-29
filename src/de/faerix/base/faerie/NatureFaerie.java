@@ -7,6 +7,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Ellipse;
 
+import de.faerix.base.enums.Direction;
+
 public class NatureFaerie implements FaerieState {
 	
 	private Sound sound; 
@@ -16,7 +18,7 @@ public class NatureFaerie implements FaerieState {
 			faerie.leftWings = new Image("assets/faerie/left_wing_nature.png").getScaledCopy(150, 150);
 			faerie.rightWings = new Image("assets/faerie/right_wing_nature.png").getScaledCopy(150, 150);
 			faerie.sparkleImage = new Image("assets/faerie/nature_sparkle.png", new Color(255,255,255,0.5f));
-			this.setStats(10, 0.5f, 100, 1, faerie);
+			this.setStats(20, 0.5f, 100, 500, faerie);
 			this.sound = new Sound("assets/sound/faerie/nature.wav");
 			faerie.color = new Color(184, 222, 135, 0.2f);
 			//this.setStats(faerie);
@@ -31,10 +33,13 @@ public class NatureFaerie implements FaerieState {
 		// TODO Auto-generated method stub
 		if(faerie.amunition > 0 ) {
 			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
-					(float)0.6, (float)600, faerie.sparkleImage, faerie.direction, this.sound, 5);
+					(float)0.6, (float)600, faerie.sparkleImage, Direction.East, this.sound, 5);
+			AttackSparkle aa2 = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
+					(float)0.6, (float)600, faerie.sparkleImage, Direction.West, this.sound, 5);
 			faerie.shotAutoattacks.add(aa);
 			aa.shoot(faerie.xPosition, faerie.yPosition);
-			System.out.println(faerie.amunition);
+			faerie.shotAutoattacks.add(aa2);
+			aa2.shoot(faerie.xPosition, faerie.yPosition);
 			faerie.amunition--;
 		}
 		

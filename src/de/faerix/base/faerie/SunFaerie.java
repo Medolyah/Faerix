@@ -7,6 +7,8 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Ellipse;
 
+import de.faerix.base.enums.Direction;
+
 public class SunFaerie implements FaerieState {
 
 	
@@ -20,7 +22,7 @@ public class SunFaerie implements FaerieState {
 			this.setStats(10, 0.5f, 100, 1, faerie);
 			 this.sound = new Sound("assets/sound/faerie/sun-2.wav");
 				faerie.color = new Color(255f, 188f, 0.2f, 0.2f); 
-			// this.setStats(faerie);
+			this.setStats(50, 0.2f, 30, 500, faerie);
 		} catch (SlickException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -30,13 +32,15 @@ public class SunFaerie implements FaerieState {
 	@Override
 	public void autoattack(Faerie faerie) {
 		// TODO Auto-generated method stub
+		Direction[] direction = {Direction.West, Direction.East, Direction.North, Direction.SouthEast, Direction.SouthWest};
 		if (faerie.amunition > 0) {
-			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5), (float) 0.6,
-					(float) 600, faerie.sparkleImage, faerie.direction, sound, 5);
-			faerie.shotAutoattacks.add(aa);
-			aa.shoot(faerie.xPosition, faerie.yPosition);
-			System.out.println(faerie.amunition);
-			faerie.amunition--;
+			for(int i = 0; i <5 ; i++) {
+				AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5), (float) 0.6,
+						(float) 600, faerie.sparkleImage, direction[i], sound, 49);
+				faerie.shotAutoattacks.add(aa);
+				aa.shoot(faerie.xPosition, faerie.yPosition);				
+				faerie.amunition--;
+			}
 		}
 
 	}
