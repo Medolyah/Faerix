@@ -53,25 +53,25 @@ public class GameHub extends GameObject{
 		this.display.setHpDivider(this.faerie.maxHp);
 	}
 
-	public void checkInput(Input input, GameContainer container, List<Stone> interactableObjs,
+	public void checkInput(int delta, Input input, GameContainer container, List<Stone> interactableObjs,
 			Faerie faerie, Portal portal, GameStage stage, StateBasedGame game, List<Enemy> enemies) {
 		if (input.isKeyPressed(Input.KEY_ESCAPE)) {
 			container.exit();
 		} else if (input.isKeyDown(Input.KEY_UP)) {
 			if(faerie.yPosition > 0) {
-				faerie.moveY(-1);				
+				faerie.moveY(-delta);				
 			}
 		} else if (input.isKeyDown(Input.KEY_DOWN)) {
 			if(faerie.yPosition < container.getHeight()) {				
-				faerie.moveY(1);
+				faerie.moveY(delta);
 			}
 		} else if (input.isKeyDown(Input.KEY_RIGHT)) {
 			if(faerie.xPosition < container.getWidth()) {
-				faerie.moveX(+1);
+				faerie.moveX(+delta);
 			}
 		} else if (input.isKeyDown(Input.KEY_LEFT)) {
 			if(faerie.xPosition > 0) {
-				faerie.moveX(-1);				
+				faerie.moveX(-delta);				
 			}
 		}
 		if(input.isKeyPressed(Input.KEY_Q)) {

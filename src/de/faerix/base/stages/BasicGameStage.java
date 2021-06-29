@@ -93,7 +93,7 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 			shape.update(delta);
 		}
 		
-		this.gamehub.checkInput(input, container, this.interactableShapes, faerie, this.portal, this, game,
+		this.gamehub.checkInput(delta, input, container, this.interactableShapes, faerie, this.portal, this, game,
 				this.enemies);
 		
 		this.checkIfEnemyGotHit(this.enemies, faerie.shotAutoattacks);
@@ -118,7 +118,7 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 
 	private void moveEnemy(int delta) {
 		for (Enemy enemy : this.enemies) {
-			enemy.move(this.faerie.xPosition, this.faerie.yPosition);
+			enemy.move(delta, this.faerie.xPosition, this.faerie.yPosition);
 			enemy.update(delta);
 			if(faerie.ellipse.intersects(enemy.shape) || enemy.shape.contains(faerie.ellipse)) {
 				faerie.takeDamage(5); 

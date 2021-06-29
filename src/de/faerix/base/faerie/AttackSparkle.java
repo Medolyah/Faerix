@@ -72,9 +72,9 @@ public class AttackSparkle extends GameObject{
 			if(this.isInXRange(xPos) &&this.isInYRange(yPos)) {
 				shape.setCenterX(this.xPos);
 				shape.setCenterY(this.yPos);
-				this.xPos += (this.xDirection*this.speed);	
-				this.yPos += (this.yDirection*this.speed);	
-				this.sparkle();
+				this.xPos += (delta*this.xDirection*this.speed);	
+				this.yPos += (delta*this.yDirection*this.speed);	
+				this.sparkle(delta);
 			}
 			else {
 				this.isDead = true; 
@@ -166,12 +166,12 @@ public class AttackSparkle extends GameObject{
 		}
 		
 	}
-	public void sparkle(){
+	public void sparkle(int delta){
 		for (int i = 0; i < 5; i++) {
 			Random random = new Random();
 			if (this.fallingSparkY[i] > this.yPos + this.stopping[i]) {
-				this.fallingSparkY[i] = this.yPos - (float) random.nextInt(20);
-				this.fallingSparkX[i] = this.xPos + (float) random.nextInt(10);
+				this.fallingSparkY[i] = this.yPos - delta*(float) random.nextInt(20);
+				this.fallingSparkX[i] = this.xPos + delta*(float) random.nextInt(10);
 			}
 			this.fallingSparkY[i] += random.nextFloat();
 			this.fallingSparkX[i] += -1 + (float) random.nextInt(3);

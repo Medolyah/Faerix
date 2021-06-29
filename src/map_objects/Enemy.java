@@ -54,15 +54,15 @@ public class Enemy extends GameObject {
 			this.hasStone = true;
 	}
 
-	public void move(float faerieX, float faerieY) {
+	public void move(int delta, float faerieX, float faerieY) {
 		if (this.xPos - faerieX < 0)
-			this.xPos += 1 * 0.02;
+			this.xPos += delta * 0.02;
 		else
-			this.xPos -= 1 * this.velocity;
+			this.xPos -= delta * this.velocity;
 		if (this.yPos - faerieY < 0)
-			this.yPos += 1 * 0.02;
+			this.yPos += delta * 0.02;
 		else
-			this.yPos -= 1 * this.velocity;
+			this.yPos -= delta * this.velocity;
 	}
 
 	private boolean invincible = false;

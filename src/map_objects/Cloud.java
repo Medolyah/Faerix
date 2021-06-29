@@ -37,7 +37,7 @@ public class Cloud extends GameObject{
 			this.xPos = -300;
 			this.yPos = this.getRandomYHeight(this.maxHeight);
 		}
-		this.xPos += this.direction*velocity; 
+		this.xPos += this.direction*delta*velocity; 
 		
 	}
 	
