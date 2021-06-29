@@ -9,6 +9,7 @@ import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 
 public class BasicFaerie implements FaerieState {
 	
@@ -20,7 +21,7 @@ public class BasicFaerie implements FaerieState {
 			faerie.sparkleImage = new Image("assets/faerie/basic_sparkle.png");
 
 			
-			this.setStats(10, 0.5f, 100, 1, faerie);
+			this.setStats(10, 0.5f, 50, 1, faerie);
 			
 			
 		} catch (SlickException e) {
@@ -33,12 +34,17 @@ public class BasicFaerie implements FaerieState {
 	@Override
 	public void autoattack(Faerie faerie) {
 		if(faerie.amunition > 0 ) {
-			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
-					(float)0.6, (float)600, faerie.sparkleImage, faerie.direction);
-			faerie.shotAutoattacks.add(aa);
-			aa.shoot(faerie.xPosition, faerie.yPosition);
-			System.out.println(faerie.amunition);
-			faerie.amunition--;
+			AttackSparkle aa;
+			try {
+				aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
+						(float)0.6, (float)600, faerie.sparkleImage, faerie.direction, new Sound("assets/sound/faerie/firespell.wav"), 5);
+				faerie.shotAutoattacks.add(aa);
+				aa.shoot(faerie.xPosition, faerie.yPosition);
+				faerie.amunition--;
+			} catch (SlickException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -83,7 +89,7 @@ public class BasicFaerie implements FaerieState {
 	@Override
 	public void setStats(int maxAmunition, float velocity, int maxHp, int invinvibleDuration, Faerie faerie) {
 		faerie.velocity = 0.5f;
-		faerie.setMaxHp(100);
+		faerie.setMaxHp(maxHp);
 		faerie.setMaxamunition(10); 
 	}
 

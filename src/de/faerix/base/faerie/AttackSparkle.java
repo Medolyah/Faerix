@@ -5,6 +5,7 @@ import java.util.Random;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Shape;
 
@@ -27,6 +28,7 @@ public class AttackSparkle extends GameObject{
 	private int xDirection; 
 	private Direction direction; 
 	public int damage = 10;
+	private Sound sound;
 	
 	
 	
@@ -36,7 +38,7 @@ public class AttackSparkle extends GameObject{
 	private int[] stopping = new int[10];
 	
 	
-	public AttackSparkle(Shape shape, float speed, float range,  Image img, Direction direction) {
+	public AttackSparkle(Shape shape, float speed, float range,  Image img, Direction direction, Sound sound, int damage) {
 		this.speed = speed;
 		this.isAttack = false; 
 		this.rangeY = range;
@@ -46,16 +48,15 @@ public class AttackSparkle extends GameObject{
 		this.direction = direction;
 		this.shape = shape;
 		this.img = img.getScaledCopy((int)shape.getWidth()*2, (int)shape.getHeight()*2);
-		
-		
-
-		
+		this.sound = sound;		
+		this.damage = damage;
 	}
 	
 	
 
 
 	public void shoot(float xPos, float yPos) {
+		this.sound.play();
 		this.isAttack = true;
 		this.xPos = xPos;
 		this.yPos = yPos;

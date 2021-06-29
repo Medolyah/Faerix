@@ -4,6 +4,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.BasicGameState;
@@ -24,6 +25,7 @@ public class EndingStage extends BasicGameState implements GameStage{
 	private float xPos;
 	private float  yPos; 
 	public StageEnum state;
+	private Music music;
 	
 	public EndingStage(StageEnum ending) {
 		this.state = state;
@@ -38,6 +40,7 @@ public class EndingStage extends BasicGameState implements GameStage{
 		this.character = new Image ("assets/goddessoflife_sprite.png").getScaledCopy(0.6f);
 		this.shape = new Rectangle(this.xPos, this.yPos, this.character.getWidth(), this.character.getHeight());
 		this.handler = StagesHandler.getInstance(); 
+		this.music = new Music("assets/sound/ending.wav"); 
 		
 	}
 	
@@ -96,6 +99,11 @@ public class EndingStage extends BasicGameState implements GameStage{
 	
 	public void goToNextLevel(StateBasedGame game) {
 		game.enterState(StageEnum.Epilogue.getNumVal());
+	}
+
+	@Override
+	public void startMusic() {
+		this.music.loop();
 	}
 	
 	

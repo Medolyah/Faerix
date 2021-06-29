@@ -25,7 +25,6 @@ public class GameOver extends BasicGameState {
 	private Shape[] circles = new Shape[30];
 	private float[] xPositions = new float[30];
 	private float[] yPositions = new float[30];
-	private float width = 10;
 	private float[] factors = new float[30];
 
 	public GameOver(StageEnum gameover) {
@@ -34,8 +33,7 @@ public class GameOver extends BasicGameState {
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game) throws SlickException {
-		// bgMusic = new Music("testdata/sound/Death_Note_achtig.ogg");
-		// bgMusic.loop();
+		bgMusic = new Music("assets/sound/gameover.wav");
 		background = new Image("assets/game_over.png").getScaledCopy(container.getWidth(), container.getHeight());
 		this.play = new GameOver(StageEnum.Gameover);
 
@@ -72,6 +70,10 @@ public class GameOver extends BasicGameState {
 				xPositions[i] = random.nextInt((int) container.getWidth() - (int) circles[i].getWidth());
 			}
 		}
+	}
+	
+	public void startMusic() {
+		bgMusic.loop();
 	}
 
 	@Override

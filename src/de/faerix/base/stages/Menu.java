@@ -48,7 +48,6 @@ public class Menu extends BasicGameState{
 		this.cloud3.render(g);
 		g.drawString("Welcome to Faerix",680,450);
 		playNow.draw(0,50);
-		//exitGame.draw(100,200);
 	}
 	
 	public void update(GameContainer container, StateBasedGame sbg, int  delta) throws SlickException{
@@ -61,13 +60,14 @@ public class Menu extends BasicGameState{
 		if ((posX > 500 && posX < 1100)&& (posY > 450 && posY < 1000) ) {
 			if(Mouse.isButtonDown(0)) {
 				click.play();
+				this.bgMusic.stop();
 				sbg.enterState(1);
 			}
 			}
 		}
 
 	public int getID() {
-		return 0;
+		return StageEnum.Menu.getNumVal();
 	}
 	
 }

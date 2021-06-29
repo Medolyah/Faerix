@@ -1,6 +1,7 @@
 package de.faerix.base.stages;
 import java.util.Timer;
 
+import de.faerix.base.stages.GameStage;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -65,6 +66,8 @@ public class Prologue extends BasicGameState{
 		
 		Input input  = container.getInput();
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
+			GameStage nextStage = (GameStage)game.getState(this.handler.nextStage(0));
+			nextStage.startMusic();
 			game.enterState(this.handler.nextStage(0));
 		}
 	}

@@ -10,6 +10,7 @@ public interface GameStage {
 	public void giveFaerie(Faerie faerie);
 	void goToNextLevel(StateBasedGame game);
 	int getID();
+	public void startMusic();
 	
 
 }

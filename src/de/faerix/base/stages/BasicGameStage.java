@@ -10,6 +10,7 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Ellipse;
 import org.newdawn.slick.geom.Shape;
@@ -41,6 +42,7 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 	public String imageString;
 	private int amtEnemies = 5;
 	private int timer;
+	private Music music; 
 
 	public BasicGameStage(StageEnum state) {
 		this.state = state;
@@ -103,6 +105,8 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 		}
 		this.moveEnemy(delta);
 		if (this.faerie.currentHp <= 0) {
+			GameOver gameover = (GameOver) game.getState(StageEnum.Gameover.getNumVal());
+			gameover.startMusic();
 			game.enterState(StageEnum.Gameover.getNumVal());
 		}
 
@@ -121,7 +125,16 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 				this.gamehub.display.setHp(faerie.currentHp);
 			}
 		}
-
+	}
+	
+	public void startMusic() {
+		try {
+			this.music = new Music("assets/sound/stages.wav");
+		} catch (SlickException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		this.music.loop();
 	}
 	
 	public void checkIfEnemyGotHit( List<Enemy> enemies, Deque<AttackSparkle> aas){
@@ -163,7 +176,6 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 		int nextLevel = this.handler.getNextLevelByInt(this.level);
 		GameStage nextStage = (GameStage) game.getState(nextLevel);
 		nextStage.giveFaerie(this.faerie);
-		System.out.println("Go to" + nextLevel);
 		game.enterState(this.handler.nextStage(this.level));
 	}
 
