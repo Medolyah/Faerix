@@ -36,7 +36,7 @@ public class BasicFaerie implements FaerieState {
 		if(faerie.amunition > 0 ) {
 			AttackSparkle aa;
 			try {
-				aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5),
+				aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 10),
 						(float)0.6, (float)600, faerie.sparkleImage, faerie.direction, new Sound("assets/sound/faerie/firespell.wav"), 5);
 				faerie.shotAutoattacks.add(aa);
 				aa.shoot(faerie.xPosition, faerie.yPosition);

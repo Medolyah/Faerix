@@ -56,6 +56,8 @@ public class FireFaerie implements FaerieState {
 
 	@Override
 	public void collectFireStone(Faerie faerie) {
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 
 	}
 

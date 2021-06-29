@@ -49,8 +49,9 @@ public class WaterFaerie implements FaerieState {
 	}
 
 	@Override
-	public void upgradeFaerie(Faerie faeire) {
-		// TODO Auto-generated method stub
+	public void upgradeFaerie(Faerie faerie) {
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 
 	}
 
@@ -62,7 +63,8 @@ public class WaterFaerie implements FaerieState {
 
 	@Override
 	public void collectWaterStone(Faerie faerie) {
-		
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 
 	}
 

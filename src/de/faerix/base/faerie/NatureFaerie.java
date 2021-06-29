@@ -47,31 +47,33 @@ public class NatureFaerie implements FaerieState {
 
 	@Override
 	public void ultattack(Faerie faeire) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void upgradeFaerie(Faerie faeire) {
-		// TODO Auto-generated method stub
+
 		
 	}
 
 	@Override
 	public void collectFireStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 		
 	}
 
 	@Override
 	public void collectWaterStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 		
 	}
 
 	@Override
 	public void collectStarStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 		
 	}
 

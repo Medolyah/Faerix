@@ -72,7 +72,8 @@ public class WitchFaerie implements FaerieState {
 
 	@Override
 	public void collectStarStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 
 	}
 

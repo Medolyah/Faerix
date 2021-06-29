@@ -35,7 +35,7 @@ public class SunFaerie implements FaerieState {
 		Direction[] direction = {Direction.West, Direction.East, Direction.North, Direction.SouthEast, Direction.SouthWest};
 		if (faerie.amunition > 0) {
 			for(int i = 0; i <5 ; i++) {
-				AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 5), (float) 0.6,
+				AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 4, 5), (float) 0.6,
 						(float) 600, faerie.sparkleImage, direction[i], sound, 10);
 				faerie.shotAutoattacks.add(aa);
 				aa.shoot(faerie.xPosition, faerie.yPosition);				
@@ -47,32 +47,35 @@ public class SunFaerie implements FaerieState {
 
 	@Override
 	public void ultattack(Faerie faeire) {
-		// TODO Auto-generated method stub
-
+		if(faeire.maxHp > 10) faeire.currentHp = -1*(10 - faeire.maxHp); 
+		else faeire.currentHp += 10;
 	}
 
 	@Override
 	public void upgradeFaerie(Faerie faeire) {
-		// TODO Auto-generated method stub
+
 
 	}
 
 	@Override
 	public void collectFireStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 
 	}
 
 	@Override
 	public void collectWaterStone(Faerie faerie) {
-		// TODO Auto-generated method stub
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
+
 
 	}
 
 	@Override
 	public void collectStarStone(Faerie faerie) {
-		// TODO Auto-generated method stub
-
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 	}
 
 	@Override

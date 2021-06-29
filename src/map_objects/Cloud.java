@@ -29,12 +29,12 @@ public class Cloud extends GameObject{
 	
 	
 	public void update(int delta) {
-		if(this.xPos< 0) {
-			this.xPos = this.maxWidth;
+		if(this.xPos< -300) {
+			this.xPos = this.maxWidth+300;
 			this.yPos = this.getRandomYHeight(this.maxHeight); 
 		}
-		if(this.xPos > this.maxWidth) {
-			this.xPos = 0;
+		if(this.xPos > this.maxWidth+150) {
+			this.xPos = -300;
 			this.yPos = this.getRandomYHeight(this.maxHeight);
 		}
 		this.xPos += this.direction*velocity; 
