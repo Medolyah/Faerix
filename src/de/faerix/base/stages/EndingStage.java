@@ -68,18 +68,18 @@ public class EndingStage extends BasicGameState implements GameStage{
 				container.exit();
 			} else if (input.isKeyDown(Input.KEY_UP)) {
 				if(faerie.yPosition > 0) {
-					faerie.moveY(-1);				
+					faerie.moveY(-delta);				
 				}
 			} else if (input.isKeyDown(Input.KEY_DOWN)) {
 				if(faerie.yPosition < container.getHeight()) {				
-					faerie.moveY(1);
+					faerie.moveY(delta);
 				}
 			} else if (input.isKeyDown(Input.KEY_RIGHT)) {
 				if(faerie.xPosition < container.getWidth()) {
-					faerie.moveX(+1);
+					faerie.moveX(+delta);
 				}
 			} else if (input.isKeyDown(Input.KEY_LEFT)) {
-				if(faerie.xPosition > 0) {
+				if(faerie.xPosition > delta) {
 					faerie.moveX(-1);				
 				}
 			}

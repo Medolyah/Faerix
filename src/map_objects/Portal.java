@@ -39,8 +39,8 @@ public class Portal extends GameObject{
 			g.fill(this.shape);
 			g.drawImage(this.innerRing, this.xPos-size/2, this.yPos-size/2);
 			g.drawImage(this.outerRing, this.xPos-size/2, this.yPos-size/2);
-			this.outerRing.rotate(0.004f);
-			this.innerRing.rotate(-0.005f);
+			this.outerRing.rotate(0.04f);
+			this.innerRing.rotate(-0.05f);
 		}
 	}
 	

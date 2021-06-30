@@ -75,11 +75,11 @@ public class Faerie extends GameObject {
 
 	}
 
-	public void fall() {
+	public void fall(int delta) {
 		for (int i = 0; i < 50; i++) {
 			Random random = new Random();
 			if (this.fallingSparkY[i] > this.yPosition + this.stopping[i]) {
-				this.fallingSparkY[i] = this.yPosition - 10 + (float) random.nextInt(20);
+				this.fallingSparkY[i] = this.yPosition - 10 + delta*(float) random.nextInt(20);
 				this.fallingSparkX[i] = this.xPosition - 25 + (float) random.nextInt(50);
 			}
 			this.fallingSparkY[i] += random.nextFloat();
@@ -102,7 +102,7 @@ public class Faerie extends GameObject {
 	public void moveY(int yMove) {
 		if (yMove > 0) {
 			direction = Direction.South;
-			this.yPosition += yMove * (this.velocity - 0.1f);
+			this.yPosition += yMove * (this.velocity - 0.3f);
 		} else {
 			direction = Direction.North;
 			this.yPosition += yMove * this.velocity;
@@ -112,7 +112,7 @@ public class Faerie extends GameObject {
 
 	@Override
 	public void update(int delta) {
-		this.fall();
+		this.fall(delta);
 		this.updateAutoattacks(delta);
 		
 //		if(this.invincibleTimer > 500) {
@@ -124,7 +124,8 @@ public class Faerie extends GameObject {
 //			};
 //		}
 		this.invincibleTimer++; 
-		if(this.invincibleDuration < this.invincibleTimer) {
+		System.out.println(this.invincibleDuration * delta);
+		if(this.invincibleTimer*delta > this.invincibleDuration) {
 			this.invincible = false;
 		}
 	}
