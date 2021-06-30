@@ -69,7 +69,6 @@ public class Enemy extends GameObject {
 	private int timer = 1001;
 
 	public void takeDamage(int hp) {
-		System.out.println(hp);
 		if (!this.invincible) {
 			this.maxHp -= hp;
 			this.img = this.damageImg;
@@ -85,7 +84,7 @@ public class Enemy extends GameObject {
 	public void render(Graphics g) {
 		g.setColor(Color.black);
 		g.fill(shape);
-		if (this.timer > 500) {
+		if (!this.invincible) {
 			this.img = this.normalImg;
 		} else {
 			this.img = this.damageImg;
@@ -97,7 +96,7 @@ public class Enemy extends GameObject {
 		this.shape.setCenterX(this.xPos);
 		this.shape.setCenterY(this.yPos);
 		this.timer++;
-		if (1000 < this.timer) {
+		if (600 < this.timer*delta) {
 			this.invincible = false;
 		}
 	}

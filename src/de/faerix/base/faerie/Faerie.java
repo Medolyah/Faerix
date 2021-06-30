@@ -102,7 +102,7 @@ public class Faerie extends GameObject {
 	public void moveY(int yMove) {
 		if (yMove > 0) {
 			direction = Direction.South;
-			this.yPosition += yMove * (this.velocity - 0.1f);
+			this.yPosition += yMove * (this.velocity - 0.2f);
 		} else {
 			direction = Direction.North;
 			this.yPosition += yMove * this.velocity;
@@ -114,17 +114,8 @@ public class Faerie extends GameObject {
 	public void update(int delta) {
 		this.fall();
 		this.updateAutoattacks(delta);
-		
-//		if(this.invincibleTimer > 500) {
-//			try {
-//				this.image = new Image("assets/faerie.png").getScaledCopy(68, 65);
-//			} catch (SlickException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			};
-//		}
 		this.invincibleTimer++; 
-		if(this.invincibleDuration < this.invincibleTimer) {
+		if(this.invincibleDuration < this.invincibleTimer*delta) {
 			this.invincible = false;
 		}
 	}

@@ -82,6 +82,8 @@ public class GameHub extends GameObject{
 		if(input.isKeyPressed(Input.KEY_SPACE)) {
 			this.checkIntersection(faerie, interactableObjs);
 			this.intersectionPortal(portal, stage, game);
+		}		if(input.isKeyPressed(Input.KEY_Z)) {
+			stage.goToNextLevel(game);
 		}
 	}
 	
