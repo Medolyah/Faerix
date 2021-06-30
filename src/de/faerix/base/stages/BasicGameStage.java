@@ -113,7 +113,6 @@ public abstract class BasicGameStage extends BasicGameState implements GameStage
 		if(this.amtEnemies == 0 && this.enemies.size() == 0) {
 			this.portal.isAlive = true;			
 		}
-
 	}
 
 	private void moveEnemy(int delta) {

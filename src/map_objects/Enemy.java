@@ -36,7 +36,7 @@ public class Enemy extends GameObject {
 		this.size = 100 + random.nextInt(100);
 		this.shape = new Ellipse(this.xPos, this.yPos, size / 4, size / 4);
 		this.maxHp = 50;
-		this.velocity = (float) (random.nextFloat() * 0.09);
+		this.velocity = (float) (random.nextFloat() * 0.05);
 		try {
 			this.dmg = new Sound("assets/sound/uk.ogg");
 		} catch (SlickException e1) {
@@ -56,11 +56,11 @@ public class Enemy extends GameObject {
 
 	public void move(int delta, float faerieX, float faerieY) {
 		if (this.xPos - faerieX < 0)
-			this.xPos += delta * 0.02;
+			this.xPos += delta * this.velocity;
 		else
 			this.xPos -= delta * this.velocity;
 		if (this.yPos - faerieY < 0)
-			this.yPos += delta * 0.02;
+			this.yPos += delta * this.velocity;
 		else
 			this.yPos -= delta * this.velocity;
 	}
@@ -98,6 +98,7 @@ public class Enemy extends GameObject {
 		this.timer++;
 		if (600 < this.timer*delta) {
 			this.invincible = false;
+			this.timer = 0;
 		}
 	}
 
