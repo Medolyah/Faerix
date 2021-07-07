@@ -59,9 +59,9 @@ public class Prologue extends BasicGameState{
 				+ "If we do nothing, they will destroy our beautiful lands... \n"
 				+ "You have to help us... ";
 		time++;
-		if(time % 100 == 0 && this.string.length() < string.length()) {
+		if(time % 50 == 0 && this.string.length() < string.length()) {
 			click.play(3, (float) 0.5);
-				this.string = string.substring(0, time/100);				
+				this.string = string.substring(0, time/50);				
 			}
 		
 		Input input  = container.getInput();

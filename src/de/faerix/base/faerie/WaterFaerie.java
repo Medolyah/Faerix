@@ -33,7 +33,7 @@ public class WaterFaerie implements FaerieState {
 	public void autoattack(Faerie faerie) {
 		if(faerie.amunition> 0) {
 			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 15, 15),
-					(float)0.2, (float)800, faerie.sparkleImage, faerie.direction, sound, 20);
+					(float)0.2, (float)800, faerie.sparkleImage, faerie.direction, sound, 15);
 			faerie.shotAutoattacks.add(aa);
 			aa.shoot(faerie.xPosition, faerie.yPosition);
 			faerie.amunition--;

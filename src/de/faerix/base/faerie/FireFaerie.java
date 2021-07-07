@@ -30,7 +30,7 @@ public class FireFaerie implements FaerieState {
 	public void autoattack(Faerie faerie) {
 
 		if (faerie.amunition > 0) {
-			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 23), (float) 1.5,
+			AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 15), (float) 1.5,
 					(float) 600, faerie.sparkleImage, faerie.direction, sound, 15);
 			faerie.shotAutoattacks.add(aa);
 			aa.shoot(faerie.xPosition, faerie.yPosition);

@@ -20,7 +20,7 @@ public class WitchFaerie implements FaerieState {
 			faerie.leftWings = new Image("assets/faerie/left_wing_witch.png").getScaledCopy(150, 150);
 			faerie.rightWings = new Image("assets/faerie/right_wing_witch.png").getScaledCopy(150, 150);
 			faerie.sparkleImage = new Image("assets/faerie/witch_sparkle.png", new Color(255,255,255,0.5f));
-			this.setStats(15, 0.5f, 200, 1000, faerie);
+			this.setStats(15, 0.9f, 200, 1000, faerie);
 			this.sound = new Sound("assets/sound/faerie/witch.wav");
 			faerie.color = new Color(188, 151, 222, 0.2f);
 		} catch (SlickException e) {
@@ -36,8 +36,8 @@ public class WitchFaerie implements FaerieState {
 	        Direction[] directions = {Direction.South, Direction.SouthWest, Direction.SouthEast};
 	        if(faerie.amunition > 2 ) {
 	            for(int i = 0; i<3; i++) {
-	                AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 25),
-	                        (float)0.6, (float)600, faerie.sparkleImage, directions[i], this.sound, 3);
+	                AttackSparkle aa = new AttackSparkle(new Ellipse(faerie.xPosition, faerie.yPosition, 5, 15),
+	                        (float)0.6, (float)900, faerie.sparkleImage, directions[i], this.sound, 3);
 	                faerie.shotAutoattacks.add(aa);
 	                aa.shoot(faerie.xPosition, faerie.yPosition);
 	                faerie.amunition--;
@@ -60,13 +60,15 @@ public class WitchFaerie implements FaerieState {
 
 	@Override
 	public void collectFireStone(Faerie faerie) {
-		faerie.form = new SunFaerie(faerie);
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 
 	}
 
 	@Override
 	public void collectWaterStone(Faerie faerie) {
-		faerie.form = new NatureFaerie(faerie);
+		if(faerie.maxHp > 10) faerie.currentHp = -1*(10 - faerie.maxHp); 
+		else faerie.currentHp += 10;
 
 	}
 
