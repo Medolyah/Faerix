@@ -96,7 +96,7 @@ public class Enemy extends GameObject {
 		this.shape.setCenterX(this.xPos);
 		this.shape.setCenterY(this.yPos);
 		this.timer++;
-		if (delta*this.timer > 1000) {
+		if (600 < this.timer*delta) {
 			this.invincible = false;
 			this.timer = 0;
 		}

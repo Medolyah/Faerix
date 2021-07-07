@@ -56,9 +56,9 @@ public class Epilogue extends BasicGameState{
 				+ "We will forever be grateful for the service you've given this kingdom. \n"
 				+ "As the Queen of these lands I thank you from the bottom of my heart.";
 		time++;
-		if(time % 100 == 0 && this.string.length() < string.length()) {
+		if(time % 50 == 0 && this.string.length() < string.length()) {
 			click.play(3, (float) 0.5);
-				this.string = string.substring(0, time/100);				
+				this.string = string.substring(0, time/50);				
 			}
 		
 		if(container.getInput().isKeyPressed(Input.KEY_SPACE)) {

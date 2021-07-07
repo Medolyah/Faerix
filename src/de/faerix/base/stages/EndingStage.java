@@ -79,8 +79,8 @@ public class EndingStage extends BasicGameState implements GameStage{
 					faerie.moveX(+delta);
 				}
 			} else if (input.isKeyDown(Input.KEY_LEFT)) {
-				if(faerie.xPosition > delta) {
-					faerie.moveX(-1);				
+				if(faerie.xPosition > 0) {
+					faerie.moveX(-delta);				
 				}
 			}
 			

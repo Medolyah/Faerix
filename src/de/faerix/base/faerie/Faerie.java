@@ -114,17 +114,7 @@ public class Faerie extends GameObject {
 	public void update(int delta) {
 		this.fall(delta);
 		this.updateAutoattacks(delta);
-		
-//		if(this.invincibleTimer > 500) {
-//			try {
-//				this.image = new Image("assets/faerie.png").getScaledCopy(68, 65);
-//			} catch (SlickException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			};
-//		}
 		this.invincibleTimer++; 
-		System.out.println(this.invincibleDuration * delta);
 		if(this.invincibleTimer*delta > this.invincibleDuration) {
 			this.invincible = false;
 		}
